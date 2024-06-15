@@ -10,10 +10,11 @@ import {
 	ToggleButtonGroup,
 } from "@mui/material";
 // import { getItemCount, getItems } from './fakeShopApiService'; // Assuming you have these functions to fetch data
-import "./styles.css";
+
 import { Item } from "../../interfaces/Item";
 import { ItemCard } from "../../components/ItemCard";
 import { items } from "../../constants/items";
+import "./styles.css";
 
 const Home = () => {
 	//   const { control, handleSubmit, reset } = useForm();
@@ -121,13 +122,7 @@ const Home = () => {
 								<ToggleButton value="electronics">Electronics</ToggleButton>
 							</ToggleButtonGroup>
 						</div>
-						<Slider
-							value={sliderValues}
-							min={0}
-							max={500}
-							onChange={onSliderChange}
-							valueLabelDisplay="auto"
-						/>
+						
 						<div>
 							{lastSearch && (
 								<h5>
