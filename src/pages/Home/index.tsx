@@ -1,78 +1,61 @@
 import React, { useEffect, useState } from "react";
-// import { useForm, Controller } from 'react-hook-form';
 import {
 	Autocomplete,
 	TextField,
 	Button,
 	Pagination,
-	Slider,
 	ToggleButton,
 	ToggleButtonGroup,
 } from "@mui/material";
-// import { getItemCount, getItems } from './fakeShopApiService'; // Assuming you have these functions to fetch data
 
 import { Item } from "../../interfaces/Item";
 import { ItemCard } from "../../components/ItemCard";
 import { items } from "../../constants/items";
 import "./styles.css";
+import { Category } from "../../interfaces/enums/Filter";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../state/store";
+import { useShopHandlers } from "../../state/handlers/shopHandlers";
 
 const Home = () => {
-	//   const { control, handleSubmit, reset } = useForm();
-	const [itemsQuantity, setItemsQuantity] = useState(0);
-	const [filteredShopItems, setFilteredShopItems] = useState<Item[]>(items);
+	const dispatch = useDispatch();
+	const filteredItems = useSelector(
+		(state: RootState) => state.shop.filteredItems
+	);
+	const { handleFilterByCategory, handleFilterByTitle, handleResetFilters } =
+		useShopHandlers();
 	const [lastSearch, setLastSearch] = useState("");
-	const [category, setCategory] = useState("all");
-	const [sliderValues, setSliderValues] = useState([300, 400]);
+	const [category, setCategory] = useState<Category>(Category.ALL);
 	const [searchString, setSearchString] = useState("");
-	const [searchOptions, setSearchOptions] = useState(items);
+	const [searchOptions, setSearchOptions] = useState(filteredItems);
 	const [page, setPage] = useState(0);
 
-	const fetchItems = (requestData) => {
-		// const count = getItemCount(requestData);
-		// 	if (count > 0) {
-		// 		const items = getItems(requestData);
-		// 		setFilteredShopItems(items);
-		// 	}
-		// 	setItemsQuantity(count);
-		// };
-		setFilteredShopItems(items);
-	};
-
 	useEffect(() => {
-		const requestData = { category: "all", page: 0, title: "" };
-		fetchItems(requestData);
-	}, []);
+		setSearchOptions(filteredItems);
+	}, [filteredItems]);
 
-	const handleCategoryChange = async (event) => {
-		const newCategory = event.target.value;
+	const changeCategory = (
+		event: React.MouseEvent<HTMLElement>,
+		newCategory: Category
+	) => {
 		setCategory(newCategory);
-		const requestData = { category: newCategory, page: 0, title: "" };
-		fetchItems(requestData);
+		handleFilterByCategory(newCategory);
 		setLastSearch("");
 	};
 
-	const onSliderChange = (event, newValue) => {
-		setSliderValues(newValue);
-	};
+	// const handleSearchSubmit = (e) => {
+	// 	e.preventDefault();
+	// 	dispatch(filterByTitle(searchString));
+	// 	setLastSearch(searchString);
+	// };
 
-	const handleSearchSubmit = () => {
-		const requestData = { category, page: 0, title: searchString };
-		setLastSearch(searchString);
-		console.log(requestData);
-	};
+	// const handleSearchChange = (event) => {
+	// 	setSearchString(event.target.value);
+	// };
 
-	const handleSearchChange = (event) => {
-		setSearchString(event.target.value);
-		// const requestData = { category, page: 0, title: data.search };
-		// setLastSearch(data.search);
-		// fetchItems(requestData);
-	};
-
-	const handlePageChange = async (event, newPage) => {
-		const requestData = { category, page: newPage * 6, title: "" };
-		setPage(newPage);
-		fetchItems(requestData);
-	};
+	// const handlePageChange = (event, newPage) => {
+	// 	setPage(newPage);
+	// };
 
 	return (
 		<div>
@@ -82,7 +65,7 @@ const Home = () => {
 				</div>
 				<div className="content-container">
 					<div className="search-container">
-						<form onSubmit={handleSearchSubmit}>
+						{/* <form onSubmit={handleSearchSubmit}>
 							<Autocomplete
 								options={searchOptions}
 								renderInput={(params) => (
@@ -94,54 +77,55 @@ const Home = () => {
 									/>
 								)}
 							/>
-
 							<Button type="submit" variant="contained">
 								Search
 							</Button>
-						</form>
+						</form> */}
 					</div>
-
 					<div className="main-box">
 						<div>
 							<h3>Categories:</h3>
 							<ToggleButtonGroup
 								value={category}
 								exclusive
-								onChange={handleCategoryChange}
+								onChange={(event, newCategory) =>
+									changeCategory(event, newCategory as Category)
+								}
 								aria-label="category"
 								orientation="vertical"
 							>
-								<ToggleButton value="all">All categories</ToggleButton>
-								<ToggleButton value="men's clothing">
+								<ToggleButton value={Category.ALL}>All categories</ToggleButton>
+								<ToggleButton value={Category.MEN_S_CLOTHING}>
 									Men's clothing
 								</ToggleButton>
-								<ToggleButton value="women's clothing">
+								<ToggleButton value={Category.WOMEN_S_CLOTHING}>
 									Women's clothing
 								</ToggleButton>
-								<ToggleButton value="jewelery">Jewelery</ToggleButton>
-								<ToggleButton value="electronics">Electronics</ToggleButton>
+								<ToggleButton value={Category.JEWELERY}>Jewelery</ToggleButton>
+								<ToggleButton value={Category.ELECTRONICS}>
+									Electronics
+								</ToggleButton>
 							</ToggleButtonGroup>
 						</div>
-						
 						<div>
 							{lastSearch && (
 								<h5>
-									Search results for "{lastSearch}": {itemsQuantity}
+									Search results for "{lastSearch}": {filteredItems.length}
 								</h5>
 							)}
 							<div className="grid-content">
-								{filteredShopItems.map((item) => (
+								{filteredItems.map((item) => (
 									<ItemCard item={item} key={item.id} />
 								))}
 							</div>
-							<div className="paginator">
+							{/* <div className="paginator">
 								<Pagination
-									count={Math.ceil(itemsQuantity / 6)}
+									count={Math.ceil(filteredItems.length / 6)}
 									page={page + 1}
 									onChange={handlePageChange}
 									color="primary"
 								/>
-							</div>
+							</div> */}
 						</div>
 					</div>
 				</div>
