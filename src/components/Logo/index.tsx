@@ -1,9 +1,9 @@
 import React from "react";
 
-export const Logo = () => (
+export const Logo = ({ size = 75 }) => (
 	<svg
-		height={75}
-		width={75}
+		height={size}
+		width={size}
 		viewBox="91.2449951171875 55 392.510009765625 425.0399990081787"
 		xmlns="http://www.w3.org/2000/svg"
 		style={{ transform: "scale(0.865)" }}
@@ -56,7 +56,7 @@ export const Logo = () => (
 				<g
 					data-horizontal-grow="center"
 					style={{
-						fill: 'white',
+						fill: "white",
 						fontSize: "32px",
 						fontWeight: 600,
 						fontStyle: "normal",

@@ -16,19 +16,23 @@ export const CategoriesToggleBar = ({
 	changeCategory,
 }: CategoriesToggleBarProps) => {
 	return (
-		<aside>
+		<aside className="categories_container">
 			<h3>Categories:</h3>
 			<ToggleButtonGroup
 				value={category}
 				exclusive
-				onChange={(event, newCategory) =>
-					changeCategory(event, newCategory as Category)
-				}
+				onChange={(event, newCategory) => {
+					if (newCategory !== null) {
+						changeCategory(event, newCategory as Category);
+					}
+				}}
 				aria-label="category"
 				orientation="vertical"
 				sx={{
+					width: "100%",
 					"& .MuiToggleButton-root": {
 						color: "black",
+
 						borderColor: "black",
 						"&.Mui-selected": {
 							color: "white",
@@ -36,6 +40,7 @@ export const CategoriesToggleBar = ({
 						},
 						"&:hover": {
 							backgroundColor: "rgba(0, 0, 0, 0.5)",
+                            color: "white",
 						},
 					},
 				}}

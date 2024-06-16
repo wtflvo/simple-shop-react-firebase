@@ -18,6 +18,7 @@ import NavBar from "../../components/NavBar";
 import { Search } from "@mui/icons-material";
 import { SearchForm } from "../../components/SearchForm";
 import { CategoriesToggleBar } from "../../components/CategoriesToggleBar";
+import { Footer } from "../../components/Footer";
 
 const Home = () => {
 	const filteredItems = useSelector(
@@ -67,46 +68,37 @@ const Home = () => {
 		setSearchString(value);
 	};
 
-	// const handlePageChange = (event, newPage) => {
-	// 	setPage(newPage);
-	// };
-
 	return (
 		<div className="home-page_container">
 			<NavBar />
-			<div className="content-container">
+			<div className="home-page_main">
 				<SearchForm
 					handleSearchSubmit={handleSearchSubmit}
 					handleSearchChange={handleSearchChange}
 					searchOptions={searchOptions}
 				/>
-				<div className="main-box">
+				<div className="main_filters-and_items">
 					<CategoriesToggleBar
 						category={category}
 						changeCategory={changeCategory}
 					/>
-					<div>
+					<div className="main_items">
 						{lastSearch && (
-							<h5>
-								Search results for "{lastSearch}": {filteredItems.length}
-							</h5>
+							<div className="search-results_count">
+								<h5>
+									Search results for "{lastSearch}": {filteredItems.length}
+								</h5>
+							</div>
 						)}
 						<div className="grid-content">
 							{filteredItems.map((item) => (
 								<ItemCard item={item} key={item.id} />
 							))}
 						</div>
-						{/* <div className="paginator">
-								<Pagination
-									count={Math.ceil(filteredItems.length / 6)}
-									page={page + 1}
-									onChange={handlePageChange}
-									color="primary"
-								/>
-							</div> */}
 					</div>
 				</div>
 			</div>
+			<Footer />
 		</div>
 	);
 };

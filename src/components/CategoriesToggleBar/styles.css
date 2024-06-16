@@ -1,0 +1,26 @@
+.categories_container {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 0;
+    border-right: 2px solid black;
+    padding-right: 1rem;
+}
+
+.categories_container h3 {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.categories_container button {
+    width: 100%;
+    text-align: center;
+    /* text-wrap: nowrap; */
+   
+}
+
+.categories_container button:active:hover {
+    background-color: black !important;
+    color: white;
+}

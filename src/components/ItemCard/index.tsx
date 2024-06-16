@@ -1,11 +1,28 @@
-import React from 'react';
-import { Card, CardActions, CardContent, CardHeader, Divider } from "@mui/material";
+import React from "react";
+import {
+	Card,
+	CardActions,
+	CardContent,
+	CardHeader,
+	Divider,
+} from "@mui/material";
 import { Item } from "../../interfaces/Item";
+import "./styles.css";
 
 export const ItemCard = ({ item }: { item: Item }) => {
 	return (
-		<Card className="child">
-			<CardHeader title={item.title} subheader={`Category: ${item.category}`} />
+		<Card className="card">
+			<CardHeader
+				title={item.title}
+				subheader={`Category: ${item.category}`}
+				sx={{ padding: 0 }}
+				titleTypographyProps={{
+					sx: { backgroundColor: "black", color: "white", padding: "1rem" },
+				}}
+				subheaderTypographyProps={{
+					sx: { backgroundColor: "grey", color: "white", padding: ".5rem" },
+				}}
+			/>
 			<CardContent>
 				<div className="row card-content">
 					<div className="img-content">
