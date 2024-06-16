@@ -1,0 +1,7 @@
+.rating-wrapper {
+    font-size: 18px;
+    font-weight: 600;
+    padding-top: .5rem;
+    border-top: solid 1px black;
+    color: rgb(138, 35, 35)
+}

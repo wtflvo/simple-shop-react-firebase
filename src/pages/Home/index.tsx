@@ -1,11 +1,4 @@
 import React, { useEffect, useState } from "react";
-import {
-	Autocomplete,
-	TextField,
-	Button,
-	ToggleButton,
-	ToggleButtonGroup,
-} from "@mui/material";
 
 import { ItemCard } from "../../components/ItemCard";
 import { items } from "../../constants/items";
@@ -13,24 +6,25 @@ import { Category } from "../../interfaces/enums/Filter";
 import { useSelector } from "react-redux";
 import { RootState } from "../../state/store";
 import { useShopHandlers } from "../../state/handlers/shopHandlers";
-import "./styles.css";
+
 import NavBar from "../../components/NavBar";
-import { Search } from "@mui/icons-material";
+
 import { SearchForm } from "../../components/SearchForm";
 import { CategoriesToggleBar } from "../../components/CategoriesToggleBar";
 import { Footer } from "../../components/Footer";
+import "./styles.css";
 
 const Home = () => {
 	const filteredItems = useSelector(
 		(state: RootState) => state.shop.filteredItems
 	);
-	const { handleFilterByCategory, handleFilterByTitle, handleResetFilters } =
+	const { handleFilterByCategory, handleFilterByTitle} =
 		useShopHandlers();
 	const [lastSearch, setLastSearch] = useState("");
 	const [category, setCategory] = useState<Category>(Category.ALL);
 	const [searchString, setSearchString] = useState("");
 	const [searchOptions, setSearchOptions] = useState<string[]>([]);
-	const [page, setPage] = useState(0);
+
 
 	useEffect(() => {
 		setSearchOptions(getAllSearchOptions());

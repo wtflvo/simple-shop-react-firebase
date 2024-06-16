@@ -1,26 +1,52 @@
 .categories_container {
-    width: 25%;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 0;
-    border-right: 2px solid black;
-    padding-right: 1rem;
+	width: 25%;
+	display: flex;
+	flex-direction: column;
+	flex-grow: 0;
+	border-right: 2px solid black;
+	padding-right: 1rem;
 }
 
 .categories_container h3 {
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: 400;
+	text-align: center;
+	text-transform: uppercase;
+	font-weight: 400;
 }
 
 .categories_container button {
-    width: 100%;
-    text-align: center;
-    /* text-wrap: nowrap; */
-   
+	width: 100%;
+	text-align: center;
+	/* text-wrap: nowrap; */
 }
 
 .categories_container button:active:hover {
-    background-color: black !important;
-    color: white;
+	background-color: black !important;
+	color: white;
+}
+@media (max-width: 600px) {
+	.categories_container {
+		width: 100%;
+		border: none;
+		justify-content: center;
+		align-items: center;
+        gap: 1rem;
+		padding: 0;
+	}
+	.categories_container .MuiToggleButtonGroup-root {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+		width: 100%;
+		justify-content: center;
+		align-items: center;
+		font-size: 14px !important;
+	}
+
+	
+
+	.categories_container button {
+		border-radius: 0;
+
+		width: auto !important;
+		height: auto !important;
+	}
 }

@@ -18,9 +18,10 @@ export const SearchForm = ({
 		<div className="search-form_container">
 			<form onSubmit={handleSearchSubmit}>
 				<Autocomplete
+					freeSolo
 					options={searchOptions}
 					sx={{ width: 300 }}
-					onInputChange={handleSearchChange}
+					onInputChange={(event, value) => handleSearchChange(event, value)}
 					renderInput={(params) => (
 						<TextField {...params} label="Search" variant="outlined" />
 					)}

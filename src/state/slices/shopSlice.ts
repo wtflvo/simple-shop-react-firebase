@@ -41,9 +41,40 @@ const shopSlice = createSlice({
 		resetFilters: (state) => {
 			state.filteredItems = items;
 		},
-        
+		addToCart: (state, action) => {
+			const itemId = action.payload;
+			const itemInCart = state.cart.find(
+				(cartItem) => cartItem.itemId === itemId
+			);
+			if (itemInCart) {
+				itemInCart.quantity += 1;
+			} else {
+				state.cart.push({ itemId, quantity: 1 });
+			}
+		},
+		removeFromCart: (state, action) => {
+			const itemId = action.payload;
+			const itemInCart = state.cart.find(
+				(cartItem) => cartItem.itemId === itemId
+			);
+			if (itemInCart) {
+				if (itemInCart.quantity > 1) {
+					itemInCart.quantity -= 1;
+				} else {
+					state.cart = state.cart.filter(
+						(cartItem) => cartItem.itemId !== itemId
+					);
+				}
+			}
+		},
 	},
 });
 
-export const { filterByCategory, filterByTitle, resetFilters } = shopSlice.actions;
+export const {
+	filterByCategory,
+	filterByTitle,
+	resetFilters,
+	addToCart,
+	removeFromCart,
+} = shopSlice.actions;
 export default shopSlice.reducer;
