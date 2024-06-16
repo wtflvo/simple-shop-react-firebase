@@ -6,7 +6,7 @@ import {
 	ToggleButton,
 	ToggleButtonGroup,
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+
 import { ItemCard } from "../../components/ItemCard";
 import { items } from "../../constants/items";
 import { Category } from "../../interfaces/enums/Filter";
@@ -15,6 +15,8 @@ import { RootState } from "../../state/store";
 import { useShopHandlers } from "../../state/handlers/shopHandlers";
 import "./styles.css";
 import NavBar from "../../components/NavBar";
+import { Search } from "@mui/icons-material";
+import { SearchForm } from "../../components/SearchForm";
 
 const Home = () => {
 	const filteredItems = useSelector(
@@ -76,21 +78,7 @@ const Home = () => {
 			<div className="info-container">
 				<NavBar />
 				<div className="content-container">
-					<div className="search-container">
-						<form onSubmit={handleSearchSubmit}>
-							<Autocomplete
-								options={searchOptions}
-								sx={{ width: 300 }}
-								onInputChange={handleSearchChange}
-								renderInput={(params) => (
-									<TextField {...params} label="Search" variant="outlined" />
-								)}
-							/>
-							<Button type="submit" variant="contained">
-								Search <SearchIcon />
-							</Button>
-						</form>
-					</div>
+					<SearchForm handleSearchSubmit={handleSearchSubmit} handleSearchChange={handleSearchChange} searchOptions={searchOptions}/>
 					<div className="main-box">
 						<div>
 							<h3>Categories:</h3>

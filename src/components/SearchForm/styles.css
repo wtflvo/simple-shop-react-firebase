@@ -1,0 +1,16 @@
+.search-form_container {
+	display: flex;
+	justify-content: center;
+}
+
+.search-form_container form {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 4px;
+}
+.search-form_container button[type="submit"] {
+	background-color: black;
+	padding: 16px;
+	gap: 2px;
+}

@@ -11,22 +11,7 @@
 }
 
 
-.search-container {
-	display: flex;
-	justify-content: center;
-}
 
-.search-container form {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 4px;
-}
-.search-container button[type="submit"] {
-	background-color: black;
-	padding: 16px;
-	gap: 2px;
-}
 
 .paginator {
 	display: flex;
@@ -35,21 +20,8 @@
 .child {
 	min-height: 100%;
 }
-.search-form {
-	width: 75%;
-	display: flex;
-	gap: 4px;
-	justify-content: center;
-}
-.search-btn {
-	padding: 18px 8px 9px 8px;
-}
-.search-img {
-	max-width: 28px;
-}
-::ng-deep .mat-input-wrapper {
-	width: 400px !important;
-}
+
+
 
 .main-box {
 	display: flex;
