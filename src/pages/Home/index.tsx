@@ -17,6 +17,7 @@ import "./styles.css";
 import NavBar from "../../components/NavBar";
 import { Search } from "@mui/icons-material";
 import { SearchForm } from "../../components/SearchForm";
+import { CategoriesToggleBar } from "../../components/CategoriesToggleBar";
 
 const Home = () => {
 	const filteredItems = useSelector(
@@ -62,73 +63,40 @@ const Home = () => {
 		setLastSearch(searchString);
 	};
 
-	const handleSearchChange = (
-		event: React.ChangeEvent<{}>,
-		value: string
-	  ) => {
+	const handleSearchChange = (event: React.ChangeEvent<{}>, value: string) => {
 		setSearchString(value);
-	  };
+	};
 
 	// const handlePageChange = (event, newPage) => {
 	// 	setPage(newPage);
 	// };
 
 	return (
-		<div>
-			<div className="info-container">
-				<NavBar />
-				<div className="content-container">
-					<SearchForm handleSearchSubmit={handleSearchSubmit} handleSearchChange={handleSearchChange} searchOptions={searchOptions}/>
-					<div className="main-box">
-						<div>
-							<h3>Categories:</h3>
-							<ToggleButtonGroup
-								value={category}
-								exclusive
-								onChange={(event, newCategory) =>
-									changeCategory(event, newCategory as Category)
-								}
-								aria-label="category"
-								orientation="vertical"
-								sx={{
-									"& .MuiToggleButton-root": {
-										color: "black", // Text color for the buttons
-										borderColor: "black", // Border color for the buttons
-										"&.Mui-selected": {
-											color: "white", // Text color when selected
-											backgroundColor: "black", // Background color when selected
-										},
-										"&:hover": {
-											backgroundColor: "rgba(0, 0, 0, 0.5)", // Background color on hover
-										},
-									},
-								}}
-							>
-								<ToggleButton value={Category.ALL}>All categories</ToggleButton>
-								<ToggleButton value={Category.MEN_S_CLOTHING}>
-									Men's clothing
-								</ToggleButton>
-								<ToggleButton value={Category.WOMEN_S_CLOTHING}>
-									Women's clothing
-								</ToggleButton>
-								<ToggleButton value={Category.JEWELERY}>Jewelery</ToggleButton>
-								<ToggleButton value={Category.ELECTRONICS}>
-									Electronics
-								</ToggleButton>
-							</ToggleButtonGroup>
+		<div className="home-page_container">
+			<NavBar />
+			<div className="content-container">
+				<SearchForm
+					handleSearchSubmit={handleSearchSubmit}
+					handleSearchChange={handleSearchChange}
+					searchOptions={searchOptions}
+				/>
+				<div className="main-box">
+					<CategoriesToggleBar
+						category={category}
+						changeCategory={changeCategory}
+					/>
+					<div>
+						{lastSearch && (
+							<h5>
+								Search results for "{lastSearch}": {filteredItems.length}
+							</h5>
+						)}
+						<div className="grid-content">
+							{filteredItems.map((item) => (
+								<ItemCard item={item} key={item.id} />
+							))}
 						</div>
-						<div>
-							{lastSearch && (
-								<h5>
-									Search results for "{lastSearch}": {filteredItems.length}
-								</h5>
-							)}
-							<div className="grid-content">
-								{filteredItems.map((item) => (
-									<ItemCard item={item} key={item.id} />
-								))}
-							</div>
-							{/* <div className="paginator">
+						{/* <div className="paginator">
 								<Pagination
 									count={Math.ceil(filteredItems.length / 6)}
 									page={page + 1}
@@ -136,7 +104,6 @@ const Home = () => {
 									color="primary"
 								/>
 							</div> */}
-						</div>
 					</div>
 				</div>
 			</div>
