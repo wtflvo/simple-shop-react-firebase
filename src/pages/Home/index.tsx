@@ -3,22 +3,20 @@ import {
 	Autocomplete,
 	TextField,
 	Button,
-	Pagination,
 	ToggleButton,
 	ToggleButtonGroup,
 } from "@mui/material";
-
-import { Item } from "../../interfaces/Item";
+import SearchIcon from "@mui/icons-material/Search";
 import { ItemCard } from "../../components/ItemCard";
 import { items } from "../../constants/items";
-import "./styles.css";
 import { Category } from "../../interfaces/enums/Filter";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../state/store";
 import { useShopHandlers } from "../../state/handlers/shopHandlers";
+import "./styles.css";
+import NavBar from "../../components/NavBar";
 
 const Home = () => {
-	const dispatch = useDispatch();
 	const filteredItems = useSelector(
 		(state: RootState) => state.shop.filteredItems
 	);
@@ -27,12 +25,25 @@ const Home = () => {
 	const [lastSearch, setLastSearch] = useState("");
 	const [category, setCategory] = useState<Category>(Category.ALL);
 	const [searchString, setSearchString] = useState("");
-	const [searchOptions, setSearchOptions] = useState(filteredItems);
+	const [searchOptions, setSearchOptions] = useState<string[]>([]);
 	const [page, setPage] = useState(0);
 
 	useEffect(() => {
-		setSearchOptions(filteredItems);
-	}, [filteredItems]);
+		setSearchOptions(getAllSearchOptions());
+	}, []);
+	useEffect(() => {
+		const allOptions = getAllSearchOptions();
+		const filteredOptions = allOptions.filter((value) =>
+			value.includes(searchString)
+		);
+		setSearchOptions(filteredOptions);
+	}, [searchString]);
+
+	const getAllSearchOptions = () => {
+		const uniqueTitles = new Set<string>();
+		items.forEach((item) => uniqueTitles.add(item.title.toLowerCase()));
+		return Array.from(uniqueTitles);
+	};
 
 	const changeCategory = (
 		event: React.MouseEvent<HTMLElement>,
@@ -43,15 +54,18 @@ const Home = () => {
 		setLastSearch("");
 	};
 
-	// const handleSearchSubmit = (e) => {
-	// 	e.preventDefault();
-	// 	dispatch(filterByTitle(searchString));
-	// 	setLastSearch(searchString);
-	// };
+	const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		handleFilterByTitle(searchString);
+		setLastSearch(searchString);
+	};
 
-	// const handleSearchChange = (event) => {
-	// 	setSearchString(event.target.value);
-	// };
+	const handleSearchChange = (
+		event: React.ChangeEvent<{}>,
+		value: string
+	  ) => {
+		setSearchString(value);
+	  };
 
 	// const handlePageChange = (event, newPage) => {
 	// 	setPage(newPage);
@@ -60,27 +74,22 @@ const Home = () => {
 	return (
 		<div>
 			<div className="info-container">
-				<div className="header-container">
-					<h1>Random Items Shop</h1>
-				</div>
+				<NavBar />
 				<div className="content-container">
 					<div className="search-container">
-						{/* <form onSubmit={handleSearchSubmit}>
+						<form onSubmit={handleSearchSubmit}>
 							<Autocomplete
 								options={searchOptions}
+								sx={{ width: 300 }}
+								onInputChange={handleSearchChange}
 								renderInput={(params) => (
-									<TextField
-										{...params}
-										label="Search"
-										variant="outlined"
-										onChange={handleSearchChange}
-									/>
+									<TextField {...params} label="Search" variant="outlined" />
 								)}
 							/>
 							<Button type="submit" variant="contained">
-								Search
+								Search <SearchIcon />
 							</Button>
-						</form> */}
+						</form>
 					</div>
 					<div className="main-box">
 						<div>
@@ -93,6 +102,19 @@ const Home = () => {
 								}
 								aria-label="category"
 								orientation="vertical"
+								sx={{
+									"& .MuiToggleButton-root": {
+										color: "black", // Text color for the buttons
+										borderColor: "black", // Border color for the buttons
+										"&.Mui-selected": {
+											color: "white", // Text color when selected
+											backgroundColor: "black", // Background color when selected
+										},
+										"&:hover": {
+											backgroundColor: "rgba(0, 0, 0, 0.5)", // Background color on hover
+										},
+									},
+								}}
 							>
 								<ToggleButton value={Category.ALL}>All categories</ToggleButton>
 								<ToggleButton value={Category.MEN_S_CLOTHING}>
