@@ -5,9 +5,12 @@
 	background-color: #282c34;
 	color: white;
 	height: 76px;
-	width: auto;
+	/* width: auto; */
 	max-width: 100%;
-	position: relative;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
 	z-index: 100;
 	padding: 0 4%;
 }
@@ -19,6 +22,7 @@
 	height: 76px;
 	width: 76px;
 	flex-basis: 7%;
+	cursor: pointer;
 }
 
 .header-container {
@@ -31,4 +35,7 @@
 }
 .header-container h1 {
 	font-weight: 300;
+}
+.cart-icon-container {
+	cursor: pointer;
 }

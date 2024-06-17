@@ -1,17 +1,23 @@
-export interface Item {
+interface BaseItem {
 	id: number;
 	title: string;
 	price: number;
+}
+
+export interface Item extends BaseItem {
 	description: string;
 	category: string;
 	image: string;
 	rate: number;
 }
 
-export interface CartItem {
-	id: number;
-	title: string;
-	price: number;
+
+export interface CartItem extends BaseItem {
 	image: string;
 	quantity: number;
+}
+
+export interface OrderItem extends BaseItem {
+	quantity: number;
+	totalPrice: number;
 }

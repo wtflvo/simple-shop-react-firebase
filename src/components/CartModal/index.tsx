@@ -1,17 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Modal, Box, Typography, IconButton, Button } from "@mui/material";
-
 import CloseIcon from "@mui/icons-material/Close";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { RootState } from "../../state/store";
-
-import { useCartHandlers } from "../../state/handlers/shop/cartHandlers";
 import { CartItem } from "../../interfaces/items";
-
+import { CartItemBox } from "../CartItemBox";
 import { CartModalProps } from "../../interfaces/props/CartModalProps";
+import { ClientForm } from "../ClientForm";
 import "./styles.css";
 
 export const CartModal: React.FC<CartModalProps> = ({ open, onClose }) => {
@@ -19,14 +14,15 @@ export const CartModal: React.FC<CartModalProps> = ({ open, onClose }) => {
 		(state: RootState) => state.shop.cart
 	);
 
-	const { handleAddToCart, handleRemoveFromCart, handleDeleteFromCart } =
-		useCartHandlers();
-
 	return (
-		<Modal open={true} onClose={onClose} aria-labelledby="cart-modal-title">
+		<Modal open={open} onClose={onClose} aria-labelledby="cart-modal-title">
 			<Box className="cart-modal">
 				<Box className="cart-modal-header">
-					<Typography variant="h6" id="cart-modal-title">
+					<Typography
+						variant="h6"
+						sx={{ fontWeight: "bold" }}
+						id="cart-modal-title"
+					>
 						Your Cart
 					</Typography>
 					<IconButton onClick={onClose}>
@@ -34,39 +30,30 @@ export const CartModal: React.FC<CartModalProps> = ({ open, onClose }) => {
 					</IconButton>
 				</Box>
 				<Box className="cart-modal-content">
-					{cartItems.length === 0 ? (
-						<Typography>Your cart is empty.</Typography>
-					) : (
-						cartItems.map((item) => (
-							<Box key={item.id} className="cart-item">
-								<Box className="cart-item-details">
-									<img
-										src={item.image}
-										alt={item.title}
-										className="cart-item-image"
-									/>
-									<Typography>{item.title}</Typography>
-									<Typography>Price: ${item.price}</Typography>
-									<Typography>Quantity: {item.quantity}</Typography>
-								</Box>
-								<Box className="cart-item-actions">
-									<IconButton onClick={() => handleAddToCart(item)}>
-										<AddIcon />
-									</IconButton>
-									<IconButton onClick={() => handleRemoveFromCart(item.id)}>
-										<RemoveIcon />
-									</IconButton>
-									<IconButton onClick={() => handleDeleteFromCart(item.id)}>
-										<DeleteIcon />
-									</IconButton>
-								</Box>
+					{cartItems.length > 0 ? (
+						<>
+							<Box className="cart-items-container">
+								{cartItems.map((item) => (
+									<CartItemBox key={item.id} item={item} />
+								))}
 							</Box>
-						))
+							<ClientForm />
+						</>
+					) : (
+						<Typography>Your cart is empty.</Typography>
 					)}
 				</Box>
 				<Box className="cart-modal-footer">
-					<Button variant="contained" color="primary" onClick={onClose}>
-						Checkout
+					{cartItems.length > 0 && (
+						<Typography sx={{ fontWeight: "bold" }} variant="h6">
+							Total: $
+							{cartItems
+								.reduce((acc, item) => acc + item.price * item.quantity, 0)
+								.toFixed(2)}
+						</Typography>
+					)}
+					<Button variant="contained" color="warning" onClick={onClose}>
+						Continue Shopping
 					</Button>
 				</Box>
 			</Box>

@@ -1,9 +1,10 @@
 import React from "react";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+
 import { Logo } from "../Logo";
 import "./styles.css";
+import { CartIcon } from "../CartIcon";
 
-const NavBar: React.FC = ({
+const NavBar = ({
 	handleCartModalOpen,
 }: {
 	handleCartModalOpen: () => void;
@@ -11,14 +12,17 @@ const NavBar: React.FC = ({
 	return (
 		<nav role="navigation" className="navbar">
 			<div className="logo-container">
-				<Logo />
+				<a href="/">
+					{" "}
+					<Logo />
+				</a>
 			</div>
 			<div className="header-container">
 				<h1>Shop</h1>
 			</div>
 
-			<div className="cart-container" onClick={handleCartModalOpen}>
-				<ShoppingCartIcon />
+			<div className="cart-icon-container" onClick={handleCartModalOpen}>
+				<CartIcon />
 			</div>
 		</nav>
 	);
