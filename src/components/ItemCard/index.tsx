@@ -6,13 +6,15 @@ import {
 	CardContent,
 	CardHeader,
 	Divider,
-	Tooltip,
 } from "@mui/material";
 import { Rating } from "../Rating";
-import { Item } from "../../interfaces/Item";
+import { Item } from "../../interfaces/items";
+import { useCartHandlers } from "../../state/handlers/shop/cartHandlers";
 import "./styles.css";
 
 export const ItemCard = ({ item }: { item: Item }) => {
+	const { handleAddToCart } = useCartHandlers();
+
 	return (
 		<Card className="card col-sm-12 col-md-6 col-lg-6 col-12">
 			<CardHeader
@@ -46,7 +48,9 @@ export const ItemCard = ({ item }: { item: Item }) => {
 			<Divider />
 			<CardActions className="action-container">
 				<p className="card-price">{item.price}$</p>
-				<Button className="card-button">Add to cart</Button>
+				<Button onClick={() => handleAddToCart(item)} className="card-button">
+					Add to cart
+				</Button>
 			</CardActions>
 		</Card>
 	);

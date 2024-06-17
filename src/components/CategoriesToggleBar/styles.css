@@ -16,7 +16,6 @@
 .categories_container button {
 	width: 100%;
 	text-align: center;
-	/* text-wrap: nowrap; */
 }
 
 .categories_container button:active:hover {
@@ -45,7 +44,6 @@
 
 	.categories_container button {
 		border-radius: 0;
-
 		width: auto !important;
 		height: auto !important;
 	}

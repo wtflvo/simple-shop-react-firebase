@@ -1,4 +1,4 @@
-import { Item } from "../interfaces/Item";
+import { Item } from "../interfaces/items";
 
 export const items: Item[] = [
 	{
@@ -47,8 +47,7 @@ export const items: Item[] = [
 	},
 	{
 		id: 5,
-		title:
-			" Naga Gold Bracelet",
+		title: " Naga Gold Bracelet",
 		price: 695,
 		description:
 			"From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.",
@@ -114,8 +113,7 @@ export const items: Item[] = [
 	},
 	{
 		id: 11,
-		title:
-			"Silicon Power 256GB SSD",
+		title: "Silicon Power 256GB SSD",
 		price: 109,
 		description:
 			"3D NAND flash are applied to deliver high transfer speeds Remarkable transfer speeds that enable faster bootup and improved overall system performance. The advanced SLC Cache Technology allows performance boost and longer lifespan 7mm slim design suitable for Ultrabooks and Ultra-slim notebooks. Supports TRIM command, Garbage Collection technology, RAID, and ECC (Error Checking & Correction) to provide the optimized performance and enhanced reliability.",
@@ -126,8 +124,7 @@ export const items: Item[] = [
 	},
 	{
 		id: 12,
-		title:
-			"4TB Gaming Drive",
+		title: "4TB Gaming Drive",
 		price: 114,
 		description:
 			"Expand your PS4 gaming experience, Play anywhere Fast and easy, setup Sleek design with high capacity, 3-year manufacturer's limited warranty",
@@ -149,8 +146,7 @@ export const items: Item[] = [
 	},
 	{
 		id: 14,
-		title:
-			"Samsung CHG90 Gaming Monitor",
+		title: "Samsung CHG90 Gaming Monitor",
 		price: 999.99,
 		description:
 			"49 INCH SUPER ULTRAWIDE 32:9 CURVED GAMING MONITOR with dual 27 inch screen side by side QUANTUM DOT (QLED) TECHNOLOGY, HDR support and factory calibration provides stunningly realistic and accurate color and contrast 144HZ HIGH REFRESH RATE and 1ms ultra fast response time work to eliminate motion blur, ghosting, and reduce input lag",
@@ -172,8 +168,7 @@ export const items: Item[] = [
 	},
 	{
 		id: 16,
-		title:
-			"Leather Moto Biker Jacket",
+		title: "Leather Moto Biker Jacket",
 		price: 29.95,
 		description:
 			"100% POLYURETHANE(shell) 100% POLYESTER(lining) 75% POLYESTER 25% COTTON (SWEATER), Faux leather material for style and comfort / 2 pockets of front, 2-For-One Hooded denim style faux leather jacket, Button detail on waist / Detail stitching at sides, HAND WASH ONLY / DO NOT BLEACH / LINE DRY / DO NOT IRON",

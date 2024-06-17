@@ -2,14 +2,9 @@ import React from "react";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { Category } from "../../interfaces/enums/Filter";
 import "./styles.css";
+import { CategoriesToggleBarProps } from "../../interfaces/props/CategoriesToggleBarProps";
 
-interface CategoriesToggleBarProps {
-	category: Category;
-	changeCategory: (
-		event: React.MouseEvent<HTMLElement>,
-		newCategory: Category
-	) => void;
-}
+
 
 export const CategoriesToggleBar = ({
 	category,

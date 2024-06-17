@@ -5,26 +5,24 @@ import { items } from "../../constants/items";
 import { Category } from "../../interfaces/enums/Filter";
 import { useSelector } from "react-redux";
 import { RootState } from "../../state/store";
-import { useShopHandlers } from "../../state/handlers/shopHandlers";
-
+import { useFilterHandlers } from "../../state/handlers/shop/filterHandlers";
 import NavBar from "../../components/NavBar";
-
 import { SearchForm } from "../../components/SearchForm";
 import { CategoriesToggleBar } from "../../components/CategoriesToggleBar";
 import { Footer } from "../../components/Footer";
 import "./styles.css";
+import CartModal from "../../components/CartModal";
 
 const Home = () => {
 	const filteredItems = useSelector(
 		(state: RootState) => state.shop.filteredItems
 	);
-	const { handleFilterByCategory, handleFilterByTitle} =
-		useShopHandlers();
+	const { handleFilterByCategory, handleFilterByTitle } = useFilterHandlers();
 	const [lastSearch, setLastSearch] = useState("");
 	const [category, setCategory] = useState<Category>(Category.ALL);
 	const [searchString, setSearchString] = useState("");
+	const [isCartModalOpened, setIsCartModalOpened] = useState<boolean>(false);
 	const [searchOptions, setSearchOptions] = useState<string[]>([]);
-
 
 	useEffect(() => {
 		setSearchOptions(getAllSearchOptions());
@@ -52,6 +50,13 @@ const Home = () => {
 		setLastSearch("");
 	};
 
+	const handleCartModalClose = () => {
+		setIsCartModalOpened(false);
+	};
+	const handleCartModalOpen = () => {
+		setIsCartModalOpened(true);
+	};
+
 	const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		handleFilterByTitle(searchString);
@@ -64,7 +69,7 @@ const Home = () => {
 
 	return (
 		<div className="home-page_container">
-			<NavBar />
+			<NavBar handleCartModalOpen={handleCartModalOpen} />
 			<div className="home-page_main">
 				<SearchForm
 					handleSearchSubmit={handleSearchSubmit}
@@ -93,6 +98,7 @@ const Home = () => {
 				</div>
 			</div>
 			<Footer />
+			<CartModal open={isCartModalOpened} onClose={handleCartModalClose} />
 		</div>
 	);
 };

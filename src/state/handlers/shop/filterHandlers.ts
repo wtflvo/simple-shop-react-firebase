@@ -1,13 +1,13 @@
-// src/handlers/shopHandlers.js
+
 import { useDispatch } from "react-redux";
 import {
 	filterByCategory,
 	filterByTitle,
 	resetFilters,
-} from "../slices/shopSlice";
-import { Category } from "../../interfaces/enums/Filter";
+} from "../../slices/shopSlice";
+import { Category } from "../../../interfaces/enums/Filter";
 
-export const useShopHandlers = () => {
+export const useFilterHandlers = () => {
 	const dispatch = useDispatch();
 
 	const handleFilterByCategory = (category: Category) => {

@@ -1,13 +1,8 @@
 import React from "react";
 import { Autocomplete, Button, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import { SearchFormProps } from "../../interfaces/props/SearchFormProps";
 import "./styles.css";
-
-interface SearchFormProps {
-	handleSearchSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-	handleSearchChange: (event: React.ChangeEvent<{}>, value: string) => void;
-	searchOptions: string[];
-}
 
 export const SearchForm = ({
 	handleSearchSubmit,

@@ -1,19 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { items } from "../../constants/items";
-import { Item } from "../../interfaces/Item";
+
 import { Category } from "../../interfaces/enums/Filter";
+import { ShopInitialState } from "../../interfaces/ShopInitialState";
 
-interface CartItem {
-	itemId: number;
-	quantity: number;
-}
-
-interface InitialState {
-	cart: CartItem[];
-	filteredItems: Item[];
-}
-
-const initialState: InitialState = {
+const initialState: ShopInitialState = {
 	cart: [],
 	filteredItems: items,
 };
@@ -42,30 +33,28 @@ const shopSlice = createSlice({
 			state.filteredItems = items;
 		},
 		addToCart: (state, action) => {
-			const itemId = action.payload;
-			const itemInCart = state.cart.find(
-				(cartItem) => cartItem.itemId === itemId
-			);
+			const { id, price, title, image } = action.payload;
+			const itemInCart = state.cart.find((cartItem) => cartItem.id === id);
 			if (itemInCart) {
 				itemInCart.quantity += 1;
 			} else {
-				state.cart.push({ itemId, quantity: 1 });
+				state.cart.push({ id, image, title, price, quantity: 1 });
 			}
 		},
 		removeFromCart: (state, action) => {
 			const itemId = action.payload;
-			const itemInCart = state.cart.find(
-				(cartItem) => cartItem.itemId === itemId
-			);
+			const itemInCart = state.cart.find((cartItem) => cartItem.id === itemId);
 			if (itemInCart) {
 				if (itemInCart.quantity > 1) {
 					itemInCart.quantity -= 1;
 				} else {
-					state.cart = state.cart.filter(
-						(cartItem) => cartItem.itemId !== itemId
-					);
+					state.cart = state.cart.filter((cartItem) => cartItem.id !== itemId);
 				}
 			}
+		},
+		deleteFromCart: (state, action) => {
+			const itemId = action.payload;
+			state.cart = state.cart.filter((cartItem) => cartItem.id !== itemId);
 		},
 	},
 });
@@ -76,5 +65,6 @@ export const {
 	resetFilters,
 	addToCart,
 	removeFromCart,
+	deleteFromCart,
 } = shopSlice.actions;
 export default shopSlice.reducer;
