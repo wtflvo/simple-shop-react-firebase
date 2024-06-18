@@ -18,7 +18,7 @@ export const CartItemBox = ({ item }: { item: CartItem }) => {
 				<Typography sx={{ fontWeight: "bold" }}>{item.title}</Typography>
 			</Box>
 			<Box className="cart-item-actions-container">
-				<Typography>${item.price}</Typography>
+				<Typography>${item.price.toFixed(2)}</Typography>
 				<Typography>x</Typography>
 				<Box className="cart-item-actions">
 					<IconButton onClick={() => handleAddToCart(item)}>

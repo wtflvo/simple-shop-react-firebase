@@ -1,4 +1,20 @@
 .client-form-container {
-	flex-basis: 45%;
-    flex-grow: 0;
+	flex-basis: 50%;
+	flex-grow: 0;
+    max-height: 100%;
+    border: 1.7px dotted green;
+}
+
+.client-form {
+    padding: .5rem;
+}
+
+.invalid-form {
+    border: 1.7px dotted red;
+}
+@media screen and (max-width: 768px) {
+	.client-form-container {
+		
+        height: 100%;
+	}
 }

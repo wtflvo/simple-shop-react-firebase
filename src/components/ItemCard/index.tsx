@@ -47,7 +47,7 @@ export const ItemCard = ({ item }: { item: Item }) => {
 			</CardContent>
 			<Divider />
 			<CardActions className="action-container">
-				<p className="card-price">{item.price}$</p>
+				<p className="card-price">{item.price.toFixed(2)}$</p>
 				<Button onClick={() => handleAddToCart(item)} className="card-button">
 					Add to cart
 				</Button>

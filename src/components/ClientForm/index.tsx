@@ -1,86 +1,74 @@
-import React, { useState } from "react";
-import { TextField, Button, Box } from "@mui/material";
-import { useSelector } from "react-redux";
-import { RootState } from "../../state/store";
-import { CartItem, OrderItem } from "../../interfaces/items";
-import { OrderData } from "../../interfaces/OrderData";
-import './styles.css';
+import React from "react";
+import { TextField, Box, Typography } from "@mui/material";
+import { ClientFormProps } from "../../interfaces/props/ClientFormProps";
+import "./styles.css";
 
-export const ClientForm = () => {
-	const cartData = useSelector((state: RootState) => state.shop.cart);
-
-	const [name, setName] = useState("");
-	const [surname, setSurname] = useState("");
-	const [address, setAddress] = useState("");
-	const [phone, setPhone] = useState("");
-
-	const handleSubmit = (event: React.FormEvent) => {
-		event.preventDefault();
-
-		const orderItems: OrderItem[] = cartData.map((cartItem: CartItem) => ({
-			id: cartItem.id,
-			title: cartItem.title,
-			price: cartItem.price,
-			quantity: cartItem.quantity,
-			totalPrice: Number((cartItem.price * cartItem.quantity).toFixed(2)),
-		}));
-
-		const orderData: OrderData = {
-			name,
-			surname,
-			address,
-			phone,
-			orderedGoods: {
-				items: orderItems,
-				total: orderItems.reduce((acc, item) => acc + item.totalPrice, 0),
-			},
-		};
-
-		console.log(orderData);
-	};
+export const ClientForm = ({
+	formData,
+	handleChange,
+	isFormValid,
+}: ClientFormProps) => {
+	const { name, surname, address, phone } = formData;
 
 	return (
-		<Box className="client-form-container">
-			<form className="client-form" onSubmit={handleSubmit}>
+		<Box
+			className={`client-form-container ${isFormValid ? "" : "invalid-form"}`}
+		>
+			<Typography
+				sx={{
+					textAlign: "center",
+					fontWeight: "bold",
+					color: isFormValid ? "black" : "red",
+				}}
+			>
+				Fill in your details
+			</Typography>
+			<form className="client-form">
 				<TextField
+					name="name"
 					label="Name"
 					variant="outlined"
 					fullWidth
 					margin="normal"
 					value={name}
 					required
-					onChange={(e) => setName(e.target.value)}
+					onChange={handleChange}
 				/>
 				<TextField
+					name="surname"
 					label="Surname"
 					variant="outlined"
 					fullWidth
 					required
 					margin="normal"
 					value={surname}
-					onChange={(e) => setSurname(e.target.value)}
+					onChange={handleChange}
 				/>
 				<TextField
+					name="address"
 					label="Address"
 					variant="outlined"
 					fullWidth
 					required
 					margin="normal"
 					value={address}
-					onChange={(e) => setAddress(e.target.value)}
+					onChange={handleChange}
 				/>
 				<TextField
+					name="phone"
 					label="Phone"
 					variant="outlined"
+					error={phone.length !== 12}
 					fullWidth
 					required
 					margin="normal"
 					value={phone}
-					onChange={(e) => setPhone(e.target.value)}
+					onChange={handleChange}
+					helperText={"Phone number must contain 12 digits"}
+					InputProps={{
+						startAdornment: <span>+</span>,
+					}}
 				/>
-				<Button type="submit" variant="contained" color="primary">
-					Order
-				</Button>
 			</form>
 		</Box>
 	);

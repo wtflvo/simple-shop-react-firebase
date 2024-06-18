@@ -3,9 +3,10 @@ import { items } from "../../constants/items";
 
 import { Category } from "../../interfaces/enums/Filter";
 import { ShopInitialState } from "../../interfaces/ShopInitialState";
+import sessionStorageHelper from "../../helpers/sessionStorage.helper";
 
 const initialState: ShopInitialState = {
-	cart: [],
+	cart: sessionStorageHelper.loadCart() || [],
 	filteredItems: items,
 };
 
@@ -40,6 +41,7 @@ const shopSlice = createSlice({
 			} else {
 				state.cart.push({ id, image, title, price, quantity: 1 });
 			}
+			sessionStorageHelper.saveCart(state.cart);
 		},
 		removeFromCart: (state, action) => {
 			const itemId = action.payload;
@@ -50,11 +52,13 @@ const shopSlice = createSlice({
 				} else {
 					state.cart = state.cart.filter((cartItem) => cartItem.id !== itemId);
 				}
+				sessionStorageHelper.saveCart(state.cart);
 			}
 		},
 		deleteFromCart: (state, action) => {
 			const itemId = action.payload;
 			state.cart = state.cart.filter((cartItem) => cartItem.id !== itemId);
+			sessionStorageHelper.saveCart(state.cart);
 		},
 	},
 });

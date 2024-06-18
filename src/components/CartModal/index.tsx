@@ -1,18 +1,80 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Modal, Box, Typography, IconButton, Button } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import CloseIcon from "@mui/icons-material/Close";
 import { RootState } from "../../state/store";
-import { CartItem } from "../../interfaces/items";
+import { CartItem, OrderItem } from "../../interfaces/items";
 import { CartItemBox } from "../CartItemBox";
 import { CartModalProps } from "../../interfaces/props/CartModalProps";
 import { ClientForm } from "../ClientForm";
+import { OrderData } from "../../interfaces/OrderData";
+import { FormData } from "../../interfaces/FormData";
+import validationHelper from "../../helpers/validation.helper";
 import "./styles.css";
 
 export const CartModal: React.FC<CartModalProps> = ({ open, onClose }) => {
 	const cartItems: CartItem[] = useSelector(
 		(state: RootState) => state.shop.cart
 	);
+	const [formData, setFormData] = useState<FormData>({
+		name: "",
+		surname: "",
+		address: "",
+		phone: "",
+	});
+	const [isFormValid, setIsFormValid] = useState(false);
+
+	useEffect(() => {
+		const { name, surname, address, phone } = formData;
+		const isValidPhone = phone.length === 12;
+		const isValidForm =
+			name.length > 0 &&
+			surname.length > 0 &&
+			address.length > 0 &&
+			isValidPhone;
+		setIsFormValid(isValidForm);
+	}, [formData]);
+
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = e.target;
+		if (name === "phone") {
+			const phoneValid = validationHelper.checkPhone(value);
+			if (!phoneValid) {
+				return;
+			}
+		}
+		setFormData((prevData) => ({
+			...prevData,
+			[name]: value,
+		}));
+	};
+
+	const handleOrder = (event: React.FormEvent) => {
+		event.preventDefault();
+
+		const orderItems: OrderItem[] = cartItems.map((cartItem: CartItem) => ({
+			id: cartItem.id,
+			title: cartItem.title,
+			price: cartItem.price,
+			quantity: cartItem.quantity,
+			totalPrice: Number((cartItem.price * cartItem.quantity).toFixed(2)),
+		}));
+
+		const orderData: OrderData = {
+			name: formData.name,
+			surname: formData.surname,
+			address: formData.address,
+			phone: formData.phone,
+			orderedGoods: {
+				items: orderItems,
+				total: orderItems.reduce((acc, item) => acc + item.totalPrice, 0),
+			},
+		};
+
+		console.log(orderData);
+	};
 
 	return (
 		<Modal open={open} onClose={onClose} aria-labelledby="cart-modal-title">
@@ -33,28 +95,51 @@ export const CartModal: React.FC<CartModalProps> = ({ open, onClose }) => {
 					{cartItems.length > 0 ? (
 						<>
 							<Box className="cart-items-container">
+								<Typography sx={{ textAlign: "center", fontWeight: "bold" }}>
+									Check your goods
+								</Typography>
 								{cartItems.map((item) => (
 									<CartItemBox key={item.id} item={item} />
 								))}
 							</Box>
-							<ClientForm />
+
+							<ClientForm
+								formData={formData}
+								handleChange={handleInputChange}
+								isFormValid={isFormValid}
+							/>
 						</>
 					) : (
 						<Typography>Your cart is empty.</Typography>
 					)}
 				</Box>
 				<Box className="cart-modal-footer">
-					{cartItems.length > 0 && (
-						<Typography sx={{ fontWeight: "bold" }} variant="h6">
-							Total: $
-							{cartItems
-								.reduce((acc, item) => acc + item.price * item.quantity, 0)
-								.toFixed(2)}
-						</Typography>
-					)}
-					<Button variant="contained" color="warning" onClick={onClose}>
-						Continue Shopping
+					<Button variant="contained" color="error" onClick={onClose}>
+						<ArrowBackIcon />
+						Back
 					</Button>
+
+					{cartItems.length > 0 && (
+						<Box className="order-container">
+							<Typography sx={{ fontWeight: "bold" }} variant="h6">
+								Total: $
+								{cartItems
+									.reduce((acc, item) => acc + item.price * item.quantity, 0)
+									.toFixed(2)}
+							</Typography>
+
+							<Button
+								variant="contained"
+								color="success"
+								type="submit"
+								form="client-form"
+								disabled={!isFormValid}
+								onClick={handleOrder}
+							>
+								Order <CheckCircleOutlineIcon />
+							</Button>
+						</Box>
+					)}
 				</Box>
 			</Box>
 		</Modal>
