@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { items } from "../../constants/items";
 
-import { Category } from "../../interfaces/enums/Filter";
-import { ShopInitialState } from "../../interfaces/ShopInitialState";
+import { Category } from "../../interfaces/enums/Category";
+import { ShopInitialState } from "../../interfaces/initialState";
 import sessionStorageHelper from "../../helpers/sessionStorage.helper";
 
 const initialState: ShopInitialState = {

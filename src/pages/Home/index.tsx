@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import { ItemCard } from "../../components/ItemCard";
 import { items } from "../../constants/items";
-import { Category } from "../../interfaces/enums/Filter";
-import { useSelector } from "react-redux";
+import { Category } from "../../interfaces/enums/Category";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../state/store";
 import { useFilterHandlers } from "../../state/handlers/shop/filterHandlers";
 import NavBar from "../../components/NavBar";
@@ -12,8 +12,11 @@ import { CategoriesToggleBar } from "../../components/CategoriesToggleBar";
 import { Footer } from "../../components/Footer";
 import "./styles.css";
 import CartModal from "../../components/CartModal";
+import { fetchCurrenciesValue } from "../../state/handlers/currency/currencyThunk";
+import { AnyAction } from "@reduxjs/toolkit";
 
 const Home = () => {
+	const dispatch = useDispatch();
 	const filteredItems = useSelector(
 		(state: RootState) => state.shop.filteredItems
 	);
@@ -26,6 +29,7 @@ const Home = () => {
 
 	useEffect(() => {
 		setSearchOptions(getAllSearchOptions());
+		dispatch(fetchCurrenciesValue() as unknown as AnyAction);
 	}, []);
 	useEffect(() => {
 		const allOptions = getAllSearchOptions();

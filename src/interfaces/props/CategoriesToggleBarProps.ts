@@ -1,4 +1,4 @@
-import { Category } from "../enums/Filter";
+import { Category } from "../enums/Category";
 
 export interface CategoriesToggleBarProps {
 	category: Category;

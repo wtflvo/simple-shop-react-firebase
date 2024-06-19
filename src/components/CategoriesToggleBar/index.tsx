@@ -1,10 +1,8 @@
 import React from "react";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
-import { Category } from "../../interfaces/enums/Filter";
+import { Category } from "../../interfaces/enums/Category";
 import "./styles.css";
 import { CategoriesToggleBarProps } from "../../interfaces/props/CategoriesToggleBarProps";
-
-
 
 export const CategoriesToggleBar = ({
 	category,
@@ -35,7 +33,7 @@ export const CategoriesToggleBar = ({
 						},
 						"&:hover": {
 							backgroundColor: "rgba(0, 0, 0, 0.5)",
-                            color: "white",
+							color: "white",
 						},
 					},
 				}}

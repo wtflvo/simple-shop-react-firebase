@@ -13,11 +13,19 @@ import { OrderData } from "../../interfaces/OrderData";
 import { FormData } from "../../interfaces/FormData";
 import validationHelper from "../../helpers/validation.helper";
 import "./styles.css";
+import { CurrencySymbol } from "../CurrencySymbol";
 
 export const CartModal: React.FC<CartModalProps> = ({ open, onClose }) => {
 	const cartItems: CartItem[] = useSelector(
 		(state: RootState) => state.shop.cart
 	);
+	const activeCurrency = useSelector(
+		(state: RootState) => state.currency.active
+	);
+	const currencyRate = useSelector(
+		(state: RootState) => state.currency.currenciesValue[activeCurrency]
+	);
+
 	const [formData, setFormData] = useState<FormData>({
 		name: "",
 		surname: "",
@@ -57,9 +65,13 @@ export const CartModal: React.FC<CartModalProps> = ({ open, onClose }) => {
 		const orderItems: OrderItem[] = cartItems.map((cartItem: CartItem) => ({
 			id: cartItem.id,
 			title: cartItem.title,
-			price: cartItem.price,
+			price: cartItem.price * currencyRate,
 			quantity: cartItem.quantity,
-			totalPrice: Number((cartItem.price * cartItem.quantity).toFixed(2)),
+			currency: activeCurrency, //User may pay for goods later, so it will be convinient to fix actual currency rate
+			currencyRate: currencyRate,
+			totalPrice: Number(
+				(cartItem.price * cartItem.quantity * currencyRate).toFixed(2)
+			),
 		}));
 
 		const orderData: OrderData = {
@@ -122,9 +134,13 @@ export const CartModal: React.FC<CartModalProps> = ({ open, onClose }) => {
 					{cartItems.length > 0 && (
 						<Box className="order-container">
 							<Typography sx={{ fontWeight: "bold" }} variant="h6">
-								Total: $
+								Total: <CurrencySymbol />
 								{cartItems
-									.reduce((acc, item) => acc + item.price * item.quantity, 0)
+									.reduce(
+										(acc, item) =>
+											acc + item.price * item.quantity * currencyRate,
+										0
+									)
 									.toFixed(2)}
 							</Typography>
 

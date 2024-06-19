@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import {
 	Button,
 	Card,
@@ -11,8 +12,13 @@ import { Rating } from "../Rating";
 import { Item } from "../../interfaces/items";
 import { useCartHandlers } from "../../state/handlers/shop/cartHandlers";
 import "./styles.css";
+import { RootState } from "../../state/store";
+import { CurrencySymbol } from "../CurrencySymbol";
 
 export const ItemCard = ({ item }: { item: Item }) => {
+	const currencyRate = useSelector(
+		(state: RootState) => state.currency.currenciesValue[state.currency.active]
+	);
 	const { handleAddToCart } = useCartHandlers();
 
 	return (
@@ -47,7 +53,7 @@ export const ItemCard = ({ item }: { item: Item }) => {
 			</CardContent>
 			<Divider />
 			<CardActions className="action-container">
-				<p className="card-price">{item.price.toFixed(2)}$</p>
+				<p className="card-price">{(item.price * currencyRate).toFixed(2)}<CurrencySymbol /></p>
 				<Button onClick={() => handleAddToCart(item)} className="card-button">
 					Add to cart
 				</Button>

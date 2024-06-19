@@ -3,6 +3,7 @@ import React from "react";
 import { Logo } from "../Logo";
 import "./styles.css";
 import { CartIcon } from "../CartIcon";
+import { CurrencySelector } from "../CurrencySelecor";
 
 const NavBar = ({
 	handleCartModalOpen,
@@ -20,9 +21,11 @@ const NavBar = ({
 			<div className="header-container">
 				<h1>Shop</h1>
 			</div>
-
-			<div className="cart-icon-container" onClick={handleCartModalOpen}>
-				<CartIcon />
+			<div className="nav-actions">
+				<CurrencySelector />
+				<div className="cart-icon-container" onClick={handleCartModalOpen}>
+					<CartIcon />
+				</div>
 			</div>
 		</nav>
 	);
