@@ -30,6 +30,19 @@
 	overflow: hidden;
 }
 
+.card-img-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 40%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.item-image {
+	object-fit: contain;
+}
+
 .action-container {
 	display: flex;
 	justify-content: space-between;

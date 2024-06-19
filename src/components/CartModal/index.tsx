@@ -12,10 +12,10 @@ import { ClientForm } from "../ClientForm";
 import { OrderData } from "../../interfaces/OrderData";
 import { FormData } from "../../interfaces/FormData";
 import validationHelper from "../../helpers/validation.helper";
-import "./styles.css";
 import { CurrencySymbol } from "../CurrencySymbol";
 import priceCalculator from "../../helpers/priceCalculator.helper";
 import { useCartHandlers } from "../../state/handlers/shop/cartHandlers";
+import "./styles.css";
 
 export const CartModal: React.FC<CartModalProps> = ({ open, onClose }) => {
 	const { handleClearCart } = useCartHandlers();
@@ -72,11 +72,13 @@ export const CartModal: React.FC<CartModalProps> = ({ open, onClose }) => {
 			quantity: cartItem.quantity,
 			currency: activeCurrency, //User may pay for goods later, so it will be convinient to fix actual currency rate
 			currencyRate: currencyRate,
-			totalPrice: priceCalculator.getItemTotal({
-				price: cartItem.price,
-				quantity: cartItem.quantity,
-				currencyRate,
-			}),
+			totalPrice: Number(
+				priceCalculator.getItemTotal({
+					price: cartItem.price,
+					quantity: cartItem.quantity,
+					currencyRate,
+				})
+			),
 		}));
 
 		const orderData: OrderData = {
@@ -86,7 +88,7 @@ export const CartModal: React.FC<CartModalProps> = ({ open, onClose }) => {
 			phone: formData.phone,
 			orderedGoods: {
 				items: orderItems,
-				total: priceCalculator.getCartTotal(cartItems, currencyRate),
+				total: Number(priceCalculator.getCartTotal(cartItems, currencyRate)),
 			},
 		};
 

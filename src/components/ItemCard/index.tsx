@@ -37,12 +37,10 @@ export const ItemCard = ({ item }: { item: Item }) => {
 			<CardContent>
 				<div className="row card-content">
 					<div className="img-and-description">
-						<img
-							src={item.image}
-							alt="item"
-							className="item-image col-12 col-sm-12 col-md-6 col-lg-6"
-						/>
-						<div className="description-wrapper col-12 col-sm-12 col-md-6 col-lg-6">
+						<span className="card-img-wrapper">
+							<img src={item.image} alt="item" className="item-image " />
+						</span>
+						<div className="description-wrapper">
 							<div className="description-content">
 								<p className="text-short">{item.description}</p>
 							</div>
@@ -53,7 +51,10 @@ export const ItemCard = ({ item }: { item: Item }) => {
 			</CardContent>
 			<Divider />
 			<CardActions className="action-container">
-				<p className="card-price">{(item.price * currencyRate).toFixed(2)}<CurrencySymbol /></p>
+				<p className="card-price">
+					{(item.price * currencyRate).toFixed(2)}
+					<CurrencySymbol />
+				</p>
 				<Button onClick={() => handleAddToCart(item)} className="card-button">
 					Add to cart
 				</Button>
