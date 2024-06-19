@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {
 	FormControl,
@@ -6,6 +6,7 @@ import {
 	MenuItem,
 	Box,
 	SelectChangeEvent,
+	Alert,
 } from "@mui/material";
 import { RootState } from "../../state/store";
 import { CurrencyType } from "../../interfaces/enums/CurrencyType";
@@ -17,15 +18,31 @@ export const CurrencySelector: React.FC = () => {
 	const activeCurrency = useSelector(
 		(state: RootState) => state.currency.active
 	);
+	const currencyError = useSelector((state: RootState) => state.currency.error);
+	const [alertIsShown, setAlertIsShown] = useState(!!currencyError);
+
+	useEffect(() => {
+		if (currencyError !== null) {
+			setAlertIsShown(true);
+			setTimeout(() => {
+				setAlertIsShown(false);
+			}, 10000);
+		}
+	}, [currencyError]);
 
 	const handleChange = (event: SelectChangeEvent<CurrencyType>) => {
-		handleCurrencyTypeChange(event.target.value as CurrencyType);
+		if (currencyError === null) {
+			handleCurrencyTypeChange(event.target.value as CurrencyType);
+		}
 	};
 
 	return (
 		<Box className="currency-selector-container">
-			<FormControl className="currency-selector" size="small" variant="outlined">
-				
+			<FormControl
+				className="currency-selector"
+				size="small"
+				variant="outlined"
+			>
 				<Select
 					labelId="currency-select-label"
 					id="currency-select"
@@ -37,6 +54,17 @@ export const CurrencySelector: React.FC = () => {
 					<MenuItem value={CurrencyType.UAH}>UAH</MenuItem>
 				</Select>
 			</FormControl>
+			{alertIsShown && (
+				<Alert
+					className="currency-error"
+					severity="error"
+					onClose={() => {
+						setAlertIsShown(false);
+					}}
+				>
+					{currencyError}
+				</Alert>
+			)}
 		</Box>
 	);
 };

@@ -3,6 +3,7 @@ import {
 	addToCart,
 	removeFromCart,
 	deleteFromCart,
+	clearCart,
 } from "../../slices/shopSlice";
 import { CartItem, Item } from "../../../interfaces/items";
 
@@ -21,9 +22,14 @@ export const useCartHandlers = () => {
 		dispatch(deleteFromCart(itemId));
 	};
 
+	const handleClearCart = () => {
+		dispatch(clearCart());
+	};
+
 	return {
 		handleAddToCart,
 		handleRemoveFromCart,
 		handleDeleteFromCart,
+		handleClearCart,
 	};
 };

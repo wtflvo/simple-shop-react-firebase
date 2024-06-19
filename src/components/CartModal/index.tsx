@@ -14,8 +14,11 @@ import { FormData } from "../../interfaces/FormData";
 import validationHelper from "../../helpers/validation.helper";
 import "./styles.css";
 import { CurrencySymbol } from "../CurrencySymbol";
+import priceCalculator from "../../helpers/priceCalculator.helper";
+import { useCartHandlers } from "../../state/handlers/shop/cartHandlers";
 
 export const CartModal: React.FC<CartModalProps> = ({ open, onClose }) => {
+	const { handleClearCart } = useCartHandlers();
 	const cartItems: CartItem[] = useSelector(
 		(state: RootState) => state.shop.cart
 	);
@@ -69,9 +72,11 @@ export const CartModal: React.FC<CartModalProps> = ({ open, onClose }) => {
 			quantity: cartItem.quantity,
 			currency: activeCurrency, //User may pay for goods later, so it will be convinient to fix actual currency rate
 			currencyRate: currencyRate,
-			totalPrice: Number(
-				(cartItem.price * cartItem.quantity * currencyRate).toFixed(2)
-			),
+			totalPrice: priceCalculator.getItemTotal({
+				price: cartItem.price,
+				quantity: cartItem.quantity,
+				currencyRate,
+			}),
 		}));
 
 		const orderData: OrderData = {
@@ -81,11 +86,13 @@ export const CartModal: React.FC<CartModalProps> = ({ open, onClose }) => {
 			phone: formData.phone,
 			orderedGoods: {
 				items: orderItems,
-				total: orderItems.reduce((acc, item) => acc + item.totalPrice, 0),
+				total: priceCalculator.getCartTotal(cartItems, currencyRate),
 			},
 		};
 
 		console.log(orderData);
+		handleClearCart();
+		onClose();
 	};
 
 	return (
@@ -106,14 +113,14 @@ export const CartModal: React.FC<CartModalProps> = ({ open, onClose }) => {
 				<Box className="cart-modal-content">
 					{cartItems.length > 0 ? (
 						<>
-							<Box className="cart-items-container">
+							<div className="cart-items-container">
 								<Typography sx={{ textAlign: "center", fontWeight: "bold" }}>
 									Check your goods
 								</Typography>
 								{cartItems.map((item) => (
 									<CartItemBox key={item.id} item={item} />
 								))}
-							</Box>
+							</div>
 
 							<ClientForm
 								formData={formData}
@@ -126,22 +133,27 @@ export const CartModal: React.FC<CartModalProps> = ({ open, onClose }) => {
 					)}
 				</Box>
 				<Box className="cart-modal-footer">
-					<Button variant="contained" color="error" onClick={onClose}>
-						<ArrowBackIcon />
-						Back
-					</Button>
+					<Box className="abort-container">
+						<Button variant="contained" color="error" onClick={onClose}>
+							<ArrowBackIcon />
+							Back
+						</Button>
+						{cartItems.length > 0 && (
+							<Button
+								variant="contained"
+								color="warning"
+								onClick={handleClearCart}
+							>
+								Clear Cart
+							</Button>
+						)}
+					</Box>
 
 					{cartItems.length > 0 && (
 						<Box className="order-container">
 							<Typography sx={{ fontWeight: "bold" }} variant="h6">
 								Total: <CurrencySymbol />
-								{cartItems
-									.reduce(
-										(acc, item) =>
-											acc + item.price * item.quantity * currencyRate,
-										0
-									)
-									.toFixed(2)}
+								{priceCalculator.getCartTotal(cartItems, currencyRate)}
 							</Typography>
 
 							<Button

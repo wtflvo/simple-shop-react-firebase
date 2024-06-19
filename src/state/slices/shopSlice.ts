@@ -60,6 +60,10 @@ const shopSlice = createSlice({
 			state.cart = state.cart.filter((cartItem) => cartItem.id !== itemId);
 			sessionStorageHelper.saveCart(state.cart);
 		},
+		clearCart: (state) => {
+			state.cart = [];
+			sessionStorageHelper.saveCart(state.cart);
+		},
 	},
 });
 
@@ -70,5 +74,6 @@ export const {
 	addToCart,
 	removeFromCart,
 	deleteFromCart,
+	clearCart,
 } = shopSlice.actions;
 export default shopSlice.reducer;

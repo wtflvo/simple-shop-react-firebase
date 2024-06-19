@@ -1,7 +1,12 @@
 .currency-selector-container {
-    color: black;
+	color: black;
 }
 .currency-selector {
-    background-color: white;
-    padding: 1rem;
+	background-color: white;
+	padding: 1rem;
+}
+.currency-error {
+	position: absolute;
+	top: 76px;
+	right: 0;
 }
