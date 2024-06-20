@@ -3,17 +3,21 @@ import { AnyAction } from "@reduxjs/toolkit";
 import { setActiveCurrency } from "../../slices/currencySlice";
 import { CurrencyType } from "../../../interfaces/enums/CurrencyType";
 import { fetchCurrenciesValue } from "../../thunks/fetchCurrenciesValue";
+import { useCallback } from "react";
 
 export const useCurrencyHandlers = () => {
 	const dispatch = useDispatch();
 
-	const handleCurrencyTypeChange = (value: CurrencyType) => {
-		dispatch(setActiveCurrency(value));
-	};
+	const handleCurrencyTypeChange = useCallback(
+		(value: CurrencyType) => {
+			dispatch(setActiveCurrency(value));
+		},
+		[dispatch]
+	);
 
-	const handleFetchCurrenciesValue = () => {
+	const handleFetchCurrenciesValue = useCallback(() => {
 		dispatch(fetchCurrenciesValue() as unknown as AnyAction);
-	};
+	}, [dispatch]);
 
 	return {
 		handleCurrencyTypeChange,

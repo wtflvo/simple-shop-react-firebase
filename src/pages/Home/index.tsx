@@ -11,7 +11,7 @@ import { SearchForm } from "../../components/SearchForm";
 import { CategoriesToggleBar } from "../../components/CategoriesToggleBar";
 import { Footer } from "../../components/Footer";
 import CartModal from "../../components/CartModal";
-import { useCurrencyHandlers } from "../../state/handlers/currency/currencyHandler";
+
 import "./styles.css";
 
 const Home = () => {
@@ -20,7 +20,8 @@ const Home = () => {
 	);
 	const { handleFilterByCategory, handleFilterByTitle, handleFetchItems } =
 		useFilterHandlers();
-	const { handleFetchCurrenciesValue } = useCurrencyHandlers();
+	
+	
 	const [lastSearch, setLastSearch] = useState("");
 	const [category, setCategory] = useState<Category>(Category.ALL);
 	const [searchString, setSearchString] = useState("");
@@ -28,10 +29,10 @@ const Home = () => {
 	const [searchOptions, setSearchOptions] = useState<string[]>([]);
 
 	useEffect(() => {
-		handleFetchCurrenciesValue();
+		
 		handleFetchItems();
 		setSearchOptions(getAllSearchOptions());
-	}, [handleFetchCurrenciesValue, handleFetchItems]);
+	}, [handleFetchItems]);
 
 	useEffect(() => {
 		const allOptions = getAllSearchOptions();

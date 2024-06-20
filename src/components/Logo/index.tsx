@@ -14,7 +14,7 @@ export const Logo = ({ size = 75 }: { size?: number }) => (
 			y="125"
 			x="172.5"
 			preserveAspectRatio="xMinYMin"
-			href="/logo192.png"
+			href={`${process.env.PUBLIC_URL}/logo192.png`}
 		></image>
 		<g>
 			<svg

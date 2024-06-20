@@ -14,7 +14,8 @@ import { useCurrencyHandlers } from "../../state/handlers/currency/currencyHandl
 import "./styles.css";
 
 export const CurrencySelector: React.FC = () => {
-	const { handleCurrencyTypeChange } = useCurrencyHandlers();
+	const { handleCurrencyTypeChange, handleFetchCurrenciesValue } =
+		useCurrencyHandlers();
 	const activeCurrency = useSelector(
 		(state: RootState) => state.currency.active
 	);
@@ -22,11 +23,15 @@ export const CurrencySelector: React.FC = () => {
 	const [alertIsShown, setAlertIsShown] = useState(!!currencyError);
 
 	useEffect(() => {
+		handleFetchCurrenciesValue();
+	}, [handleFetchCurrenciesValue]);
+
+	useEffect(() => {
 		if (currencyError !== null) {
 			setAlertIsShown(true);
 			setTimeout(() => {
 				setAlertIsShown(false);
-			}, 10000);
+			}, 6000);
 		}
 	}, [currencyError]);
 
