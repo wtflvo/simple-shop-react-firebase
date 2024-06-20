@@ -4,10 +4,14 @@ import { items } from "../../constants/items";
 import { Category } from "../../interfaces/enums/Category";
 import { ShopInitialState } from "../../interfaces/initialState";
 import sessionStorageHelper from "../../helpers/sessionStorage.helper";
+import { Status } from "../../interfaces/enums/Status";
+import { fetchItems } from "../thunks/fetchItems";
 
 const initialState: ShopInitialState = {
 	cart: sessionStorageHelper.loadCart() || [],
-	filteredItems: items,
+	filteredItems: [],
+	status: Status.IDLE,
+	error: null,
 };
 
 const shopSlice = createSlice({
@@ -30,9 +34,7 @@ const shopSlice = createSlice({
 				item.title.toLowerCase().includes(title.toLowerCase())
 			);
 		},
-		resetFilters: (state) => {
-			state.filteredItems = items;
-		},
+
 		addToCart: (state, action) => {
 			const { id, price, title, image } = action.payload;
 			const itemInCart = state.cart.find((cartItem) => cartItem.id === id);
@@ -65,12 +67,26 @@ const shopSlice = createSlice({
 			sessionStorageHelper.saveCart(state.cart);
 		},
 	},
+	extraReducers: (builder) => {
+		builder
+			.addCase(fetchItems.pending, (state) => {
+				state.status = Status.LOADING;
+			})
+			.addCase(fetchItems.fulfilled, (state, action) => {
+				state.status = Status.SUCCEEDED;
+				state.filteredItems = action.payload;
+			})
+			.addCase(fetchItems.rejected, (state, action) => {
+				state.filteredItems = items;
+				state.status = Status.FAILED;
+				state.error = action.payload as string;
+			});
+	},
 });
 
 export const {
 	filterByCategory,
 	filterByTitle,
-	resetFilters,
 	addToCart,
 	removeFromCart,
 	deleteFromCart,

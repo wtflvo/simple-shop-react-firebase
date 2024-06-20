@@ -6,6 +6,8 @@ import { CartItem, Item } from "./items";
 export interface ShopInitialState {
 	cart: CartItem[];
 	filteredItems: Item[];
+	status: Status;
+	error: string | null;
 }
 
 export interface CurrencyInitialState {

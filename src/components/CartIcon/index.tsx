@@ -16,7 +16,9 @@ export const CartIcon = () => {
 	return (
 		<Badge
 			color="warning"
-			badgeContent={priceCalculator.getCartTotal(cartItems, currencyRate)}
+			badgeContent={Number(
+				priceCalculator.getCartTotal(cartItems, currencyRate)
+			)}
 			max={999999}
 			anchorOrigin={{
 				vertical: "top",

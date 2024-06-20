@@ -3,24 +3,24 @@ import React, { useEffect, useState } from "react";
 import { ItemCard } from "../../components/ItemCard";
 import { items } from "../../constants/items";
 import { Category } from "../../interfaces/enums/Category";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { RootState } from "../../state/store";
 import { useFilterHandlers } from "../../state/handlers/shop/filterHandlers";
 import NavBar from "../../components/NavBar";
 import { SearchForm } from "../../components/SearchForm";
 import { CategoriesToggleBar } from "../../components/CategoriesToggleBar";
 import { Footer } from "../../components/Footer";
-import "./styles.css";
 import CartModal from "../../components/CartModal";
-import { fetchCurrenciesValue } from "../../state/handlers/currency/currencyThunk";
-import { AnyAction } from "@reduxjs/toolkit";
+import { useCurrencyHandlers } from "../../state/handlers/currency/currencyHandler";
+import "./styles.css";
 
 const Home = () => {
-	const dispatch = useDispatch();
 	const filteredItems = useSelector(
 		(state: RootState) => state.shop.filteredItems
 	);
-	const { handleFilterByCategory, handleFilterByTitle } = useFilterHandlers();
+	const { handleFilterByCategory, handleFilterByTitle, handleFetchItems } =
+		useFilterHandlers();
+	const { handleFetchCurrenciesValue } = useCurrencyHandlers();
 	const [lastSearch, setLastSearch] = useState("");
 	const [category, setCategory] = useState<Category>(Category.ALL);
 	const [searchString, setSearchString] = useState("");
@@ -28,9 +28,11 @@ const Home = () => {
 	const [searchOptions, setSearchOptions] = useState<string[]>([]);
 
 	useEffect(() => {
+		handleFetchCurrenciesValue();
+		handleFetchItems();
 		setSearchOptions(getAllSearchOptions());
-		dispatch(fetchCurrenciesValue() as unknown as AnyAction);
-	}, []);
+	}, [handleFetchCurrenciesValue, handleFetchItems]);
+
 	useEffect(() => {
 		const allOptions = getAllSearchOptions();
 		const filteredOptions = allOptions.filter((value) =>

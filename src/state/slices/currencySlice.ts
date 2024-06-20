@@ -4,7 +4,7 @@ import { CurrencyType } from "../../interfaces/enums/CurrencyType";
 
 import { CurrencyInitialState } from "../../interfaces/initialState";
 import { Status } from "../../interfaces/enums/Status";
-import { fetchCurrenciesValue } from "../handlers/currency/currencyThunk";
+import { fetchCurrenciesValue } from "../thunks/fetchCurrenciesValue";
 
 const initialState: CurrencyInitialState = {
 	currenciesValue: {

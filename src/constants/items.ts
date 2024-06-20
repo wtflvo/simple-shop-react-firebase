@@ -2,7 +2,7 @@ import { Item } from "../interfaces/items";
 
 export const items: Item[] = [
 	{
-		id: 1,
+		id: "1",
 		title: "Foldsack No. 1 Backpack",
 		price: 109.95,
 		description:
@@ -12,9 +12,9 @@ export const items: Item[] = [
 		rate: 3.9,
 	},
 	{
-		id: 2,
+		id: "2",
 		title: "Mens Casual T-Shirts",
-		price: 22.30,
+		price: 22.3,
 		description:
 			"Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
 		category: "men's clothing",
@@ -24,7 +24,7 @@ export const items: Item[] = [
 		rate: 4.1,
 	},
 	{
-		id: 3,
+		id: "3",
 		title: "Mens Cotton Jacket",
 		price: 55.99,
 		description:
@@ -35,7 +35,7 @@ export const items: Item[] = [
 		rate: 4.7,
 	},
 	{
-		id: 4,
+		id: "4",
 		title: "Mens Casual Slim Fit",
 		price: 15.99,
 		description:
@@ -46,7 +46,7 @@ export const items: Item[] = [
 		rate: 2.1,
 	},
 	{
-		id: 5,
+		id: "5",
 		title: " Naga Gold Bracelet",
 		price: 695,
 		description:
@@ -57,7 +57,7 @@ export const items: Item[] = [
 		rate: 4.6,
 	},
 	{
-		id: 6,
+		id: "6",
 		title: "Gold Petite Micropave ",
 		price: 168,
 		description:
@@ -68,7 +68,7 @@ export const items: Item[] = [
 		rate: 3.9,
 	},
 	{
-		id: 7,
+		id: "7",
 		title: "White Gold Plated Princess",
 		price: 9.99,
 		description:
@@ -79,7 +79,7 @@ export const items: Item[] = [
 		rate: 3,
 	},
 	{
-		id: 8,
+		id: "8",
 		title: "Pierced Owl Rose",
 		price: 10.99,
 		description:
@@ -90,7 +90,7 @@ export const items: Item[] = [
 		rate: 1.9,
 	},
 	{
-		id: 9,
+		id: "9",
 		title: "Portable External Hard Drive",
 		price: 64,
 		description:
@@ -101,7 +101,7 @@ export const items: Item[] = [
 		rate: 3.3,
 	},
 	{
-		id: 10,
+		id: "10",
 		title: "1TB Internal SSD",
 		price: 109,
 		description:
@@ -112,7 +112,7 @@ export const items: Item[] = [
 		rate: 2.9,
 	},
 	{
-		id: 11,
+		id: "11",
 		title: "Silicon Power 256GB SSD",
 		price: 109,
 		description:
@@ -123,7 +123,7 @@ export const items: Item[] = [
 		rate: 4.8,
 	},
 	{
-		id: 12,
+		id: "12",
 		title: "4TB Gaming Drive",
 		price: 114,
 		description:
@@ -134,7 +134,7 @@ export const items: Item[] = [
 		rate: 4.8,
 	},
 	{
-		id: 13,
+		id: "13",
 		title: "Acer SB220Q",
 		price: 599,
 		description:
@@ -145,7 +145,7 @@ export const items: Item[] = [
 		rate: 2.9,
 	},
 	{
-		id: 14,
+		id: "14",
 		title: "Samsung CHG90 Gaming Monitor",
 		price: 999.99,
 		description:
@@ -156,7 +156,7 @@ export const items: Item[] = [
 		rate: 2.2,
 	},
 	{
-		id: 15,
+		id: "15",
 		title: "Women's Snowboard Jacket Winter Coats",
 		price: 56.99,
 		description:
@@ -167,7 +167,7 @@ export const items: Item[] = [
 		rate: 2.6,
 	},
 	{
-		id: 16,
+		id: "16",
 		title: "Leather Moto Biker Jacket",
 		price: 29.95,
 		description:
@@ -178,7 +178,7 @@ export const items: Item[] = [
 		rate: 2.9,
 	},
 	{
-		id: 17,
+		id: "17",
 		title: "Striped Climbing Raincoats",
 		price: 39.99,
 		description:
@@ -189,7 +189,7 @@ export const items: Item[] = [
 		rate: 3.8,
 	},
 	{
-		id: 18,
+		id: "18",
 		title: "Women's Solid Sleeve Boat",
 		price: 9.85,
 		description:
@@ -200,7 +200,7 @@ export const items: Item[] = [
 		rate: 4.7,
 	},
 	{
-		id: 19,
+		id: "19",
 		title: "Short Sleeve Moisture",
 		price: 7.95,
 		description:
@@ -211,7 +211,7 @@ export const items: Item[] = [
 		rate: 4.5,
 	},
 	{
-		id: 20,
+		id: "20",
 		title: "Womens Cotton T-Shirt",
 		price: 12.99,
 		description:

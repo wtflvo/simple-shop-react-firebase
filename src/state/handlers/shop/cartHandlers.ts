@@ -14,11 +14,11 @@ export const useCartHandlers = () => {
 		dispatch(addToCart(item));
 	};
 
-	const handleRemoveFromCart = (itemId: number) => {
+	const handleRemoveFromCart = (itemId: string) => {
 		dispatch(removeFromCart(itemId));
 	};
 
-	const handleDeleteFromCart = (itemId: number) => {
+	const handleDeleteFromCart = (itemId: string) => {
 		dispatch(deleteFromCart(itemId));
 	};
 

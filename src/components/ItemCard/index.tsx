@@ -11,9 +11,9 @@ import {
 import { Rating } from "../Rating";
 import { Item } from "../../interfaces/items";
 import { useCartHandlers } from "../../state/handlers/shop/cartHandlers";
-import "./styles.css";
 import { RootState } from "../../state/store";
 import { CurrencySymbol } from "../CurrencySymbol";
+import "./styles.css";
 
 export const ItemCard = ({ item }: { item: Item }) => {
 	const currencyRate = useSelector(

@@ -15,6 +15,7 @@ import validationHelper from "../../helpers/validation.helper";
 import { CurrencySymbol } from "../CurrencySymbol";
 import priceCalculator from "../../helpers/priceCalculator.helper";
 import { useCartHandlers } from "../../state/handlers/shop/cartHandlers";
+import uploadOrder from "../../db/export/uploadOrder";
 import "./styles.css";
 
 export const CartModal: React.FC<CartModalProps> = ({ open, onClose }) => {
@@ -62,7 +63,7 @@ export const CartModal: React.FC<CartModalProps> = ({ open, onClose }) => {
 		}));
 	};
 
-	const handleOrder = (event: React.FormEvent) => {
+	const handleOrder = async (event: React.FormEvent) => {
 		event.preventDefault();
 
 		const orderItems: OrderItem[] = cartItems.map((cartItem: CartItem) => ({
@@ -93,8 +94,13 @@ export const CartModal: React.FC<CartModalProps> = ({ open, onClose }) => {
 		};
 
 		console.log(orderData);
-		handleClearCart();
-		onClose();
+		try {
+			await uploadOrder(orderData);
+			handleClearCart();
+			onClose();
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	return (
