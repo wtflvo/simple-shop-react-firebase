@@ -13,26 +13,34 @@ import { Footer } from "../../components/Footer";
 import CartModal from "../../components/CartModal";
 
 import "./styles.css";
+import { Status } from "../../interfaces/enums/Status";
+import { ItemSceleton } from "../../components/ItemSceleton";
 
 const Home = () => {
 	const filteredItems = useSelector(
 		(state: RootState) => state.shop.filteredItems
 	);
+	const itemsStatus = useSelector((state: RootState) => state.shop.status);
 	const { handleFilterByCategory, handleFilterByTitle, handleFetchItems } =
 		useFilterHandlers();
-
 	const [lastSearch, setLastSearch] = useState("");
 	const [category, setCategory] = useState<Category>(Category.ALL);
 	const [searchString, setSearchString] = useState("");
 	const [isCartModalOpened, setIsCartModalOpened] = useState<boolean>(false);
 	const [searchOptions, setSearchOptions] = useState<string[]>([]);
-
+	const [isLoading, setIsLoading] = React.useState(
+		itemsStatus === Status.LOADING
+	);
 	useEffect(() => {
 		handleFetchItems();
 		setSearchOptions(getAllSearchOptions());
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	useEffect(() => {
+		setIsLoading(itemsStatus === Status.LOADING);
+	}, [itemsStatus]);
 
 	useEffect(() => {
 		const allOptions = getAllSearchOptions();
@@ -97,9 +105,13 @@ const Home = () => {
 							</div>
 						)}
 						<div className="grid-content">
-							{filteredItems.map((item) => (
-								<ItemCard item={item} key={item.id} />
-							))}
+							{filteredItems.map((item) =>
+								isLoading ? (
+									<ItemSceleton key={item.id} />
+								) : (
+									<ItemCard item={item} key={item.id} />
+								)
+							)}
 						</div>
 					</div>
 				</div>
