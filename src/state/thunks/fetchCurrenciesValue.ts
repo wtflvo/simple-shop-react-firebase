@@ -13,7 +13,7 @@ export const fetchCurrenciesValue = createAsyncThunk<
 		const currenciesValue = await currenciesApiHelper.getCurrenciesValue();
 		return currenciesValue;
 	} catch (error: any) {
-		toast.error("Failed to fetch currencies. Error code:" + error.code);
+		toast.error("Failed to fetch currencies. Error" + error.message);
 		return rejectWithValue(error.message as string);
 	}
 });

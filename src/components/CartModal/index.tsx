@@ -5,7 +5,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import CloseIcon from "@mui/icons-material/Close";
 import { RootState } from "../../state/store";
-import { CartItem, OrderItem } from "../../interfaces/items";
+import { CartItem } from "../../interfaces/items";
 import { CartItemBox } from "../CartItemBox";
 import { CartModalProps } from "../../interfaces/props/CartModalProps";
 import { ClientForm } from "../ClientForm";
@@ -13,11 +13,11 @@ import { OrderData } from "../../interfaces/OrderData";
 import { FormData } from "../../interfaces/FormData";
 import validationHelper from "../../helpers/validation.helper";
 import { CurrencySymbol } from "../CurrencySymbol";
-import priceCalculator from "../../helpers/priceCalculator.helper";
+import orderHelper from "../../helpers/order.helper";
 import { useCartHandlers } from "../../state/handlers/shop/cartHandlers";
 import uploadOrder from "../../db/export/uploadOrder";
-import "./styles.css";
 import { toast } from "react-toastify";
+import "./styles.css";
 
 export const CartModal: React.FC<CartModalProps> = ({ open, onClose }) => {
 	const { handleClearCart } = useCartHandlers();
@@ -67,34 +67,14 @@ export const CartModal: React.FC<CartModalProps> = ({ open, onClose }) => {
 	const handleOrder = async (event: React.FormEvent) => {
 		event.preventDefault();
 
-		const orderItems: OrderItem[] = cartItems.map((cartItem: CartItem) => ({
-			id: cartItem.id,
-			title: cartItem.title,
-			price: cartItem.price * currencyRate,
-			quantity: cartItem.quantity,
-			currency: activeCurrency, //User may pay for goods later, so it will be convinient to fix actual currency rate
-			currencyRate: currencyRate,
-			totalPrice: Number(
-				priceCalculator.getItemTotal({
-					price: cartItem.price,
-					quantity: cartItem.quantity,
-					currencyRate,
-				})
-			),
-		}));
+		const orderData: OrderData = orderHelper.fillOrderData({
+			cartItems,
+			formData,
+			currencyRate,
+			activeCurrency,
+		});
 
-		const orderData: OrderData = {
-			name: formData.name,
-			surname: formData.surname,
-			address: formData.address,
-			phone: formData.phone,
-			orderedGoods: {
-				items: orderItems,
-				total: Number(priceCalculator.getCartTotal(cartItems, currencyRate)),
-			},
-		};
-
-		console.log(orderData);
+		console.log(orderData, "Order Data");
 		try {
 			await uploadOrder(orderData);
 			handleClearCart();
@@ -163,7 +143,7 @@ export const CartModal: React.FC<CartModalProps> = ({ open, onClose }) => {
 						<Box className="order-container">
 							<Typography sx={{ fontWeight: "bold" }} variant="h6">
 								Total: <CurrencySymbol />
-								{priceCalculator.getCartTotal(cartItems, currencyRate)}
+								{orderHelper.getCartTotal(cartItems, currencyRate)}
 							</Typography>
 
 							<Button

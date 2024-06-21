@@ -4,7 +4,7 @@ import Badge from "@mui/material/Badge";
 import { useSelector } from "react-redux";
 import { RootState } from "../../state/store";
 import { CartItem } from "../../interfaces/items";
-import priceCalculator from "../../helpers/priceCalculator.helper";
+import orderHelper from "../../helpers/order.helper";
 
 export const CartIcon = () => {
 	const cartItems: CartItem[] = useSelector(
@@ -16,9 +16,7 @@ export const CartIcon = () => {
 	return (
 		<Badge
 			color="warning"
-			badgeContent={Number(
-				priceCalculator.getCartTotal(cartItems, currencyRate)
-			)}
+			badgeContent={Number(orderHelper.getCartTotal(cartItems, currencyRate))}
 			max={999999}
 			anchorOrigin={{
 				vertical: "top",
