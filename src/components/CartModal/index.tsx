@@ -99,6 +99,7 @@ export const CartModal: React.FC<CartModalProps> = ({ open, onClose }) => {
 			await uploadOrder(orderData);
 			handleClearCart();
 			onClose();
+			toast.success("Your order has been successfully created!");
 		} catch (error: any) {
 			toast.error(("Error uploading order, error: " + error.message) as string);
 		}
