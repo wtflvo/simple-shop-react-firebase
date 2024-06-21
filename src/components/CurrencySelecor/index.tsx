@@ -24,7 +24,8 @@ export const CurrencySelector: React.FC = () => {
 
 	useEffect(() => {
 		handleFetchCurrenciesValue();
-	}, [handleFetchCurrenciesValue]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	useEffect(() => {
 		if (currencyError !== null) {

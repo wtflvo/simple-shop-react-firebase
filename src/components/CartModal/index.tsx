@@ -17,6 +17,7 @@ import priceCalculator from "../../helpers/priceCalculator.helper";
 import { useCartHandlers } from "../../state/handlers/shop/cartHandlers";
 import uploadOrder from "../../db/export/uploadOrder";
 import "./styles.css";
+import { toast } from "react-toastify";
 
 export const CartModal: React.FC<CartModalProps> = ({ open, onClose }) => {
 	const { handleClearCart } = useCartHandlers();
@@ -98,8 +99,8 @@ export const CartModal: React.FC<CartModalProps> = ({ open, onClose }) => {
 			await uploadOrder(orderData);
 			handleClearCart();
 			onClose();
-		} catch (error) {
-			console.log(error);
+		} catch (error: any) {
+			toast.error(("Error uploading order, error: " + error.message) as string);
 		}
 	};
 

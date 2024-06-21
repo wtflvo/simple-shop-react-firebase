@@ -5,7 +5,7 @@
 	padding: 1rem 0;
 	position: relative;
 	margin-top: 76px;
-	max-width: 90%;
+	max-width: 100%;
 }
 
 .search-form_container form {
@@ -22,6 +22,7 @@
 @media screen and (max-width: 768px) {
 	.search-form_container {
 		margin: 76px auto 0 auto;
+		max-width: 90%;
 	}
 
 	.search-form_container form {

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { ItemCard } from "../../components/ItemCard";
 import { items } from "../../constants/items";
 import { Category } from "../../interfaces/enums/Category";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../state/store";
 import { useFilterHandlers } from "../../state/handlers/shop/filterHandlers";
 import NavBar from "../../components/NavBar";
@@ -20,8 +20,7 @@ const Home = () => {
 	);
 	const { handleFilterByCategory, handleFilterByTitle, handleFetchItems } =
 		useFilterHandlers();
-	
-	
+
 	const [lastSearch, setLastSearch] = useState("");
 	const [category, setCategory] = useState<Category>(Category.ALL);
 	const [searchString, setSearchString] = useState("");
@@ -29,10 +28,11 @@ const Home = () => {
 	const [searchOptions, setSearchOptions] = useState<string[]>([]);
 
 	useEffect(() => {
-		
 		handleFetchItems();
 		setSearchOptions(getAllSearchOptions());
-	}, [handleFetchItems]);
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	useEffect(() => {
 		const allOptions = getAllSearchOptions();

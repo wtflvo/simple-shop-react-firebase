@@ -7,10 +7,8 @@ const uploadOrder = async (order: OrderData) => {
 		const orderCollection = collection(db, "orders");
 
 		await addDoc(orderCollection, order);
-
-		console.log("Order uploaded successfully");
 	} catch (error) {
-		console.error("Error uploading order: ", error);
+		throw error;
 	}
 };
 

@@ -28,7 +28,7 @@ export const items: Item[] = [
 		title: "Mens Cotton Jacket",
 		price: 55.99,
 		description:
-			"great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.",
+			"great outerwear jackets for Spring Autumn Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.",
 		category: "men's clothing",
 		image: "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
 
@@ -160,7 +160,7 @@ export const items: Item[] = [
 		title: "Women's Snowboard Jacket Winter Coats",
 		price: 56.99,
 		description:
-			"Note:The Jackets is US standard size, Please choose size as your usual wear Material: 100% Polyester; Detachable Liner Fabric: Warm Fleece. Detachable Functional Liner: Skin Friendly, Lightweigt and Warm.Stand Collar Liner jacket, keep you warm in cold weather. Zippered Pockets: 2 Zippered Hand Pockets, 2 Zippered Pockets on Chest (enough to keep cards or keys)and 1 Hidden Pocket Inside.Zippered Hand Pockets and Hidden Pocket keep your things secure. Humanized Design: Adjustable and Detachable Hood and Adjustable cuff to prevent the wind and water,for a comfortable fit. 3 in 1 Detachable Design provide more convenience, you can separate the coat and inner as needed, or wear it together. It is suitable for different season and help you adapt to different climates",
+			"Note:The Jackets is US standard size, Please choose size as your usual wear Material: 100% Polyester; Detachable Liner Fabric: Warm Fleece. Detachable Functional Liner: Skin Friendly, Lightweigt and Warm.Stand Collar Liner jacket, keep you warm in cold weather. Zippered Pockets: 2 Zippered Hand Pockets, 2 Zippered Pockets on Chest (enough to keep cards or keys)and 1 Hidden Pocket Inside.Zippered Hand Pockets and Hidden Pocket keep your things secure.",
 		category: "women's clothing",
 		image: "https://fakestoreapi.com/img/51Y5NI-I5jL._AC_UX679_.jpg",
 
@@ -215,10 +215,9 @@ export const items: Item[] = [
 		title: "Womens Cotton T-Shirt",
 		price: 12.99,
 		description:
-			"95%Cotton,5%Spandex, Features: Casual, Short Sleeve, Letter Print,V-Neck,Fashion Tees, The fabric is soft and has some stretch., Occasion: Casual/Office/Beach/School/Home/Street. Season: Spring,Summer,Autumn,Winter.",
+			"95% Cotton,5% Spandex, Features: Casual, Short Sleeve, Letter Print, V-Neck, Fashion Tees, The fabric is soft and has some stretch., Occasion: Casual/Office Beach School Home Street. Season: Spring, Summer, Autumn, Winter.",
 		category: "women's clothing",
 		image: "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg",
-
 		rate: 3.6,
 	},
 ];

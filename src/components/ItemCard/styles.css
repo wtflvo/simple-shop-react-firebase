@@ -16,24 +16,29 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	gap: 1rem;
+	gap: .5rem;
 }
 .description-wrapper {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	width: 100%;
+	width: 65%;
+	flex-basis: 65%;
 	max-height: 200px;
 	height: 100%;
 }
 .description-content {
-	overflow: hidden;
+	overflow-y: auto;
+	display: flex;
+	
 }
 
 .card-img-wrapper {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	min-width: 35%;
+	flex-basis: 35%;
 	width: 40%;
 	height: 100%;
 	overflow: hidden;

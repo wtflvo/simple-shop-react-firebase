@@ -9,7 +9,7 @@ export const fetchItems = createAsyncThunk(
 
 			return fetchedItems;
 		} catch (error: any) {
-			return rejectWithValue("Failed to fetch items, error code: " + error.code);
+			return rejectWithValue(error.message as string);
 		}
 	}
 );

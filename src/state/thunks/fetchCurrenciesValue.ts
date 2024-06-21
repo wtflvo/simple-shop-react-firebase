@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import currenciesApiHelper from "../../helpers/currencyApi.helper";
 import { CurrenciesValue } from "../../interfaces/CurrenciesValue";
+import { toast } from "react-toastify";
 
 export const fetchCurrenciesValue = createAsyncThunk<
 	CurrenciesValue,
@@ -11,8 +12,8 @@ export const fetchCurrenciesValue = createAsyncThunk<
 	try {
 		const currenciesValue = await currenciesApiHelper.getCurrenciesValue();
 		return currenciesValue;
-	} catch (error) {
-		console.error(error);
-		return rejectWithValue("Failed to fetch currencies");
+	} catch (error: any) {
+		toast.error("Failed to fetch currencies. Error code:" + error.code);
+		return rejectWithValue(error.message as string);
 	}
 });
