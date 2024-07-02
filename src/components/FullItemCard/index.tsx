@@ -6,7 +6,6 @@ import {
 	CardContent,
 	CardHeader,
 	Divider,
-	
 } from "@mui/material";
 import { Rating } from "../Rating";
 import { useCartHandlers } from "../../state/handlers/shop/cartHandlers";
@@ -20,7 +19,6 @@ export const FullItemCard = ({ item, closeModal }: FullItemCardProps) => {
 	const currencyRate = useSelector(
 		(state: RootState) => state.currency.currenciesValue[state.currency.active]
 	);
-	
 
 	const { handleAddToCart } = useCartHandlers();
 
@@ -31,7 +29,7 @@ export const FullItemCard = ({ item, closeModal }: FullItemCardProps) => {
 				sx={{ padding: 0 }}
 				titleTypographyProps={{
 					sx: {
-						padding: ".5rem",
+						padding: ".5rem 1rem",
 						cursor: "default",
 					},
 				}}
@@ -49,11 +47,12 @@ export const FullItemCard = ({ item, closeModal }: FullItemCardProps) => {
 							<div className="description-content">
 								<p className="text-short">{item.description}</p>
 							</div>
-							<Rating rate={item.rate} />
 						</div>
 					</div>
 				</div>
+				
 			</CardContent>
+			<Rating rate={item.rate} />
 			<Divider />
 			<CardActions className="action-container">
 				<p className="card-price">
