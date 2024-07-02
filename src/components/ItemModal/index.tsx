@@ -4,11 +4,16 @@ import { FullItemCard } from "../FullItemCard";
 import { ItemModalProps } from "../../interfaces/props/ItemModalProps";
 import "./styles.css";
 
-export const ItemModal = ({ item, onClose, open }: ItemModalProps) => {
+export const ItemModal = ({
+	item,
+	onClose,
+	open,
+	
+}: ItemModalProps) => {
 	return (
 		<Modal open={open} onClose={onClose}>
 			<Box className="item-modal">
-				<FullItemCard item={item} closeModal={onClose} />
+				<FullItemCard item={item} closeModal={onClose}/>
 			</Box>
 		</Modal>
 	);

@@ -1,6 +1,6 @@
 .full-card {
 	min-height: 100%;
-	
+
 	border: 1.5px solid black;
 	box-shadow: 5px 5px -5px rgba(0, 0, 0, 0.44);
 }
@@ -17,15 +17,15 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	gap: .5rem;
+	gap: 0.5rem;
 	cursor: default;
 }
 .full-card .description-wrapper {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	width: 65%;
-	flex-basis: 65%;
+	width: 50%;
+
 	max-height: 200px;
 	height: 100%;
 	cursor: default;
@@ -33,16 +33,15 @@
 .full-card .description-content {
 	overflow-y: auto;
 	display: flex;
-	
 }
 
 .full-card .card-img-wrapper {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	min-width: 35%;
-	flex-basis: 35%;
-	width: 40%;
+	min-width: 50%;
+
+	width: 50%;
 	height: 100%;
 	overflow: hidden;
 }
@@ -55,14 +54,10 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 5% 10% !important;
+	padding: 0.5rem 1rem !important;
 }
 
-.full-card .card-price {
-	font-size: 1.5rem;
-	font-weight: 500;
-	color: rgb(18, 106, 18);
-}
+
 
 .full-card .card-button {
 	background-color: black !important;
@@ -70,6 +65,11 @@
 	padding: 16px !important;
 	margin: 0;
 	box-shadow: 2px 2px -2px rgba(0, 0, 0, 0.44);
+}
+
+.full-card .card-button:hover {
+	background-color: rgba(10, 14, 10, 0.68) !important;
+	box-shadow: 4px 4px -4px rgba(0, 0, 0, 0.44);;
 }
 
 @media screen and (max-width: 600px) {

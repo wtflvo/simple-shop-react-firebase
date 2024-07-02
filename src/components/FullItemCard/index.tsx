@@ -1,30 +1,26 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import {
-	Button,
 	Card,
 	CardActions,
 	CardContent,
 	CardHeader,
 	Divider,
+	
 } from "@mui/material";
 import { Rating } from "../Rating";
-import { Item } from "../../interfaces/items";
 import { useCartHandlers } from "../../state/handlers/shop/cartHandlers";
 import { RootState } from "../../state/store";
 import { CurrencySymbol } from "../CurrencySymbol";
+import { FullItemCardProps } from "../../interfaces/props/FullItemCardProps";
+import { AddButton } from "../AddButton";
 import "./styles.css";
 
-export const FullItemCard = ({
-	item,
-	closeModal,
-}: {
-	item: Item;
-	closeModal: () => void;
-}) => {
+export const FullItemCard = ({ item, closeModal }: FullItemCardProps) => {
 	const currencyRate = useSelector(
 		(state: RootState) => state.currency.currenciesValue[state.currency.active]
 	);
+	
 
 	const { handleAddToCart } = useCartHandlers();
 
@@ -32,20 +28,9 @@ export const FullItemCard = ({
 		<Card className="full-card">
 			<CardHeader
 				title={item.title}
-				subheader={`Category: ${item.category}`}
 				sx={{ padding: 0 }}
 				titleTypographyProps={{
 					sx: {
-						backgroundColor: "black",
-						color: "white",
-						padding: "1rem",
-						cursor: "default",
-					},
-				}}
-				subheaderTypographyProps={{
-					sx: {
-						backgroundColor: "grey",
-						color: "white",
 						padding: ".5rem",
 						cursor: "default",
 					},
@@ -56,6 +41,9 @@ export const FullItemCard = ({
 					<div className="img-and-description">
 						<span className="card-img-wrapper">
 							<img src={item.image} alt="item" className="item-image " />
+							<div className="category-overlay">
+								<p>{item.category}</p>
+							</div>
 						</span>
 						<div className="description-wrapper">
 							<div className="description-content">
@@ -72,15 +60,13 @@ export const FullItemCard = ({
 					{(item.price * currencyRate).toFixed(2)}
 					<CurrencySymbol />
 				</p>
-				<Button
-					onClick={() => {
+				<AddButton
+					itemId={item.id}
+					handleAdd={() => {
 						handleAddToCart(item);
 						closeModal();
 					}}
-					className="card-button"
-				>
-					Add to cart
-				</Button>
+				/>
 			</CardActions>
 		</Card>
 	);

@@ -81,13 +81,7 @@
 	padding: .5rem 1rem;
 }
 
-.add-button {
-	background-color: transparent;
-}
-.add-icon {
-	color: green;
-	font-size: 2rem !important;
-}
+
 
 @media screen and (max-width: 600px) {
 	.card {

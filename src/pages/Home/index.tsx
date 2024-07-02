@@ -14,9 +14,10 @@ import CartModal from "../../components/CartModal";
 import { Status } from "../../interfaces/enums/Status";
 import { ItemSceleton } from "../../components/ItemSceleton";
 import { ItemCard } from "../../components/ItemCard";
-import "./styles.css";
+
 import { Item } from "../../interfaces/items";
 import { ItemModal } from "../../components/ItemModal";
+import "./styles.css";
 
 const Home = () => {
 	const filteredItems = useSelector(
@@ -131,7 +132,7 @@ const Home = () => {
 			<ItemModal
 				onClose={() => setIsItemModalOpened(false)}
 				open={isItemModalOpened}
-				item={activeItem}
+				item={activeItem ?? ({} as Item)}
 			/>
 		</div>
 	);
