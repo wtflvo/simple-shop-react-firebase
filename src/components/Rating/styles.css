@@ -1,7 +1,8 @@
 .rating-wrapper {
-    font-size: 18px;
-    font-weight: 600;
-    padding-top: .5rem;
-    border-top: solid 1px black;
-    color: rgb(138, 35, 35)
+	font-size: 16px;
+	font-weight: 600;
+	padding: 0.5rem 1rem;
+
+	color: rgb(218, 147, 34);
+	display: flex;
 }

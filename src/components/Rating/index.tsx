@@ -8,7 +8,6 @@ import "./styles.css";
 export const Rating = ({ rate }: { rate: number }) => {
 	return (
 		<div className="rating-wrapper">
-			<p>Product rating: {rate}/5</p>
 			{[...Array(5)].map((_, index) => {
 				const rateValue = index + 1;
 				if (rateValue <= rate) {

@@ -1,9 +1,10 @@
 import React from "react";
 
 import { Logo } from "../Logo";
-import "./styles.css";
+
 import { CartIcon } from "../CartIcon";
 import { CurrencySelector } from "../CurrencySelecor";
+import "./styles.css";
 
 const NavBar = ({
 	handleCartModalOpen,

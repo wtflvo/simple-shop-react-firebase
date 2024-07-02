@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import { ItemCard } from "../../components/ItemCard";
 import { items } from "../../constants/items";
 import { Category } from "../../interfaces/enums/Category";
 import { useSelector } from "react-redux";
@@ -12,9 +11,12 @@ import { CategoriesToggleBar } from "../../components/CategoriesToggleBar";
 import { Footer } from "../../components/Footer";
 import CartModal from "../../components/CartModal";
 
-import "./styles.css";
 import { Status } from "../../interfaces/enums/Status";
 import { ItemSceleton } from "../../components/ItemSceleton";
+import { ItemCard } from "../../components/ItemCard";
+import "./styles.css";
+import { Item } from "../../interfaces/items";
+import { ItemModal } from "../../components/ItemModal";
 
 const Home = () => {
 	const filteredItems = useSelector(
@@ -28,9 +30,10 @@ const Home = () => {
 	const [searchString, setSearchString] = useState("");
 	const [isCartModalOpened, setIsCartModalOpened] = useState<boolean>(false);
 	const [searchOptions, setSearchOptions] = useState<string[]>([]);
-	const [isLoading, setIsLoading] = React.useState(
-		itemsStatus === Status.LOADING
-	);
+	const [isLoading, setIsLoading] = useState(itemsStatus === Status.LOADING);
+	const [isItemModalOpened, setIsItemModalOpened] = useState(false);
+	const [activeItem, setActiveItem] = useState<Item | null>(null);
+
 	useEffect(() => {
 		handleFetchItems();
 		setSearchOptions(getAllSearchOptions());
@@ -109,7 +112,14 @@ const Home = () => {
 								isLoading ? (
 									<ItemSceleton key={item.id} />
 								) : (
-									<ItemCard item={item} key={item.id} />
+									<ItemCard
+										item={item}
+										key={item.id}
+										openDetails={(item: Item) => {
+											setActiveItem(item);
+											setIsItemModalOpened(true);
+										}}
+									/>
 								)
 							)}
 						</div>
@@ -118,6 +128,11 @@ const Home = () => {
 			</div>
 			<Footer />
 			<CartModal open={isCartModalOpened} onClose={handleCartModalClose} />
+			<ItemModal
+				onClose={() => setIsItemModalOpened(false)}
+				open={isItemModalOpened}
+				item={activeItem}
+			/>
 		</div>
 	);
 };

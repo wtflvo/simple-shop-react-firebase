@@ -1,0 +1,79 @@
+.full-card {
+	min-height: 100%;
+	
+	border: 1.5px solid black;
+	box-shadow: 5px 5px -5px rgba(0, 0, 0, 0.44);
+}
+
+.full-card .text-short {
+	overflow: auto;
+	height: calc(1.2em * 6);
+	line-height: 1.2em;
+	width: 100%;
+	cursor: default;
+}
+
+.full-card .img-and-description {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	gap: .5rem;
+	cursor: default;
+}
+.full-card .description-wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 65%;
+	flex-basis: 65%;
+	max-height: 200px;
+	height: 100%;
+	cursor: default;
+}
+.full-card .description-content {
+	overflow-y: auto;
+	display: flex;
+	
+}
+
+.full-card .card-img-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-width: 35%;
+	flex-basis: 35%;
+	width: 40%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.full-card .item-image {
+	object-fit: contain;
+}
+
+.full-card .action-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 5% 10% !important;
+}
+
+.full-card .card-price {
+	font-size: 1.5rem;
+	font-weight: 500;
+	color: rgb(18, 106, 18);
+}
+
+.full-card .card-button {
+	background-color: black !important;
+	color: white !important;
+	padding: 16px !important;
+	margin: 0;
+	box-shadow: 2px 2px -2px rgba(0, 0, 0, 0.44);
+}
+
+@media screen and (max-width: 600px) {
+	.card {
+		margin: 1rem 0 0 0;
+	}
+}

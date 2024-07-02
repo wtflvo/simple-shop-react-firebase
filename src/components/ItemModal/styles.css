@@ -1,0 +1,20 @@
+.item-modal {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	padding: 16px;
+	box-shadow: 24px;
+	outline: none;
+	width: auto;
+	max-width: 50%;
+	max-height: 90vh;
+	overflow-y: auto;
+}
+
+@media screen and (max-width: 768px) {
+	.item-modal {
+		max-width: 90%;
+	}
+}
