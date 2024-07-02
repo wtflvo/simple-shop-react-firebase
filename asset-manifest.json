@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/simple-shop-react-firebase/static/css/main.506a5839.css",
-    "main.js": "/simple-shop-react-firebase/static/js/main.6fb615a0.js",
+    "main.css": "/simple-shop-react-firebase/static/css/main.03cac9d2.css",
+    "main.js": "/simple-shop-react-firebase/static/js/main.8bccff68.js",
     "index.html": "/simple-shop-react-firebase/index.html",
-    "main.506a5839.css.map": "/simple-shop-react-firebase/static/css/main.506a5839.css.map",
-    "main.6fb615a0.js.map": "/simple-shop-react-firebase/static/js/main.6fb615a0.js.map"
+    "main.03cac9d2.css.map": "/simple-shop-react-firebase/static/css/main.03cac9d2.css.map",
+    "main.8bccff68.js.map": "/simple-shop-react-firebase/static/js/main.8bccff68.js.map"
   },
   "entrypoints": [
-    "static/css/main.506a5839.css",
-    "static/js/main.6fb615a0.js"
+    "static/css/main.03cac9d2.css",
+    "static/js/main.8bccff68.js"
   ]
 }
